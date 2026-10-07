@@ -379,7 +379,7 @@ function Home({ setPage }) {
         <div>
           <div className="lbl">Why Choose Us</div>
           <div className="h1">We Only Do Warehouses. That's Our Edge.</div>
-          <p style={{fontSize:15,color:'var(--gray-dark)',lineHeight:1.8,marginBottom:28}}>Founded in Sydney by Seth William Curry, Placewright Talent was built by someone who's worked on warehouse floors. We know the difference between a picker-packer and a reach truck operator — and we staff accordingly.</p>
+          <p style={{fontSize:15,color:'var(--gray-dark)',lineHeight:1.8,marginBottom:28}}>Founded in Sydney by Jubran Khalil, Placewright Talent was built by someone who's worked on warehouse floors. We know the difference between a picker-packer and a reach truck operator — and we staff accordingly.</p>
           <button className="btn-n" onClick={() => setPage('about')}>Our Story →</button>
         </div>
         <div className="mini-stats">
@@ -431,7 +431,7 @@ function About({ setPage }) {
         <div>
           <div className="lbl">Our Story</div>
           <div className="h1" style={{fontSize:'clamp(24px,3vw,36px)'}}>We Started Because the Industry Needed Better</div>
-          <p style={{fontSize:15,color:'var(--gray-dark)',lineHeight:1.8,marginBottom:14}}>Placewright Talent was founded in Sydney in 2026 by Managing Director Seth William Curry, bringing years of experience in warehouse operations, logistics, and workforce compliance — with one goal: getting people into their dream jobs.</p>
+          <p style={{fontSize:15,color:'var(--gray-dark)',lineHeight:1.8,marginBottom:14}}>Placewright Talent was founded in Sydney in 2026 by Managing Director Jubran Khalil, bringing years of experience in warehouse operations, logistics, and workforce compliance — with one goal: getting people into their dream jobs.</p>
           <p style={{fontSize:15,color:'var(--gray-dark)',lineHeight:1.8,marginBottom:14}}>We saw firsthand how generic recruitment agencies struggled to understand warehouse environments — sending under-qualified workers, skipping background checks, and leaving employers to deal with the fallout. So we built something different.</p>
           <p style={{fontSize:15,color:'var(--gray-dark)',lineHeight:1.8,marginBottom:24}}>From day one, we focused exclusively on warehouse and logistics staffing. That specialisation means we speak your language, understand your risks, and staff your floors with people who are ready to work.</p>
           <div className="vals">
@@ -459,7 +459,7 @@ function About({ setPage }) {
         <p className="sub" style={{marginBottom:44}}>Real warehouse and logistics experience — not just recruitment.</p>
         <div style={{maxWidth:820,margin:'0 auto'}}>
           {[
-            {init:'PWT',name:'Seth William Curry',role:'Managing Director',bg:'linear-gradient(135deg,#4F46E5,#7C3AED)',tc:'#ffffff',bio:'Seth has spent years in the warehouse and logistics staffing industry, and founded Placewright Talent to expand horizons — connecting good people with their dream jobs, and giving employers a partner who genuinely understands the floor.'},
+            {init:'JK',name:'Jubran Khalil',role:'Managing Director',bg:'linear-gradient(135deg,#4F46E5,#7C3AED)',tc:'#ffffff',bio:'Jubran has spent years in the warehouse and logistics staffing industry, and founded Placewright Talent to expand horizons — connecting good people with their dream jobs, and giving employers a partner who genuinely understands the floor.'},
           ].map(t => (
             <div className="team-card" key={t.name} style={{display:'grid',gridTemplateColumns:'220px 1fr'}}>
               <div className="team-av" style={{background:t.bg,color:t.tc,height:'100%',minHeight:180,fontSize:44}}>{t.init}</div>
@@ -608,7 +608,7 @@ function Jobs({ setPage }) {
       setDone(true);
     } catch(err) {
       console.error(err);
-      setSubmitErr('Something went wrong. Please try again or call us on 0470 632 701.');
+      setSubmitErr('Something went wrong. Please try again or call us on 0434 768 164.');
     } finally {
       setSubmitting(false);
     }
@@ -619,7 +619,7 @@ function Jobs({ setPage }) {
       <div className="s-icon">✓</div>
       <h2>Application Received!</h2>
       <p>Thanks for your interest in working with Placewright Talent. We'll be in touch as soon as a suitable role becomes available.</p>
-      <p style={{marginTop:8}}>In the meantime, if you have any questions call us on <strong>0470 632 701</strong>.</p>
+      <p style={{marginTop:8}}>In the meantime, if you have any questions call us on <strong>0434 768 164</strong>.</p>
       <div style={{display:'flex',gap:12,justifyContent:'center',flexWrap:'wrap',marginTop:28}}>
         <button className="btn-n" onClick={()=>{setDone(false);setForm({firstName:'',middleName:'',lastName:'',dob:'',gender:'',email:'',phone:'',address:'',suburb:'',state:'',postcode:'',preferredCity:'',workType:''});}}>Submit Another</button>
         <button className="btn-bk" onClick={()=>setPage('home')}>Return Home</button>
@@ -954,7 +954,7 @@ function AppForm({ setPage }) {
       setDone(true);
     } catch(err) {
       console.error(err);
-      setSubmitErr('Something went wrong submitting your application. Please try again or contact us on 0470 632 701.');
+      setSubmitErr('Something went wrong submitting your application. Please try again or contact us on 0434 768 164.');
     } finally {
       setSubmitting(false);
     }
@@ -967,7 +967,7 @@ function AppForm({ setPage }) {
       <div className="s-icon">✓</div>
       <h2>Application Submitted!</h2>
       <p>Your police check application has been received and is now being processed.</p>
-      <p style={{marginTop:4}}>Once complete, contact us to confirm at <strong>seth@swcstaffingsolutions.com.au</strong>.</p>
+      <p style={{marginTop:4}}>Once complete, contact us to confirm at <strong>jubran@placewrighttalent.com.au</strong>.</p>
       <div className="ref-b"><span>Your Reference Number</span><strong>{submittedRef}</strong></div>
       <p style={{fontSize:13,color:'var(--gray-mid)',marginBottom:24}}>Save this number to track your application. Results within 1–2 business days.</p>
       <div style={{display:'flex',gap:12,justifyContent:'center',flexWrap:'wrap'}}>
@@ -1143,7 +1143,7 @@ function Tracker() {
               <div className="tl-txt"><h4 style={{color:t.s==='pend'?'var(--gray-mid)':'var(--ink)'}}>{t.l}</h4><p>{t.d}</p></div>
             </div>
           ))}
-          {res.status==='complete'&&<div style={{background:'var(--success-bg)',border:'1px solid #B2DFCC',borderRadius:'var(--radius)',padding:14,marginTop:10}}><strong style={{color:'var(--success)',fontSize:13}}>✓ Your National Police Certificate has been issued. Contact Seth on 0470 632 701 to receive your copy.</strong></div>}
+          {res.status==='complete'&&<div style={{background:'var(--success-bg)',border:'1px solid #B2DFCC',borderRadius:'var(--radius)',padding:14,marginTop:10}}><strong style={{color:'var(--success)',fontSize:13}}>✓ Your National Police Certificate has been issued. Contact Jubran on 0434 768 164 to receive your copy.</strong></div>}
         </div>
       )}
     </div>
@@ -1250,7 +1250,7 @@ function AdminDash() {
       <p style={{fontSize:14,color:'var(--gray-dark)',marginBottom:22}}>Staff access only. Sign in with your Placewright Talent staff account.</p>
       <div className="fgrp" style={{marginBottom:14}}>
         <label>Email</label>
-        <input type="email" value={email} onChange={e=>{setEmail(e.target.value);setAuthErr('');}} placeholder="you@swcstaffingsolutions.com.au" autoComplete="username"/>
+        <input type="email" value={email} onChange={e=>{setEmail(e.target.value);setAuthErr('');}} placeholder="jubran@placewrighttalent.com.au" autoComplete="username"/>
       </div>
       <div className="fgrp" style={{marginBottom:14}}>
         <label>Password</label>
@@ -1397,15 +1397,15 @@ function Contact() {
         <div className="contact-grid">
           <div style={{display:'flex',flexDirection:'column',gap:26}}>
             {[
-              {icon:'📍',t:'Headquarters',d:'100 Harris Street\nPyrmont NSW 2009'},
-              {icon:'📞',t:'Phone',d:'0470 632 701\nMon–Fri, 8am–5pm AEST'},
-              {icon:'✉️',t:'Email',d:'seth@swcstaffingsolutions.com.au'},
+              {icon:'📍',t:'Headquarters',d:'333 George Street\nSydney NSW 2000'},
+              {icon:'📞',t:'Phone',d:'0434 768 164\nMon–Fri, 8am–5pm AEST'},
+              {icon:'✉️',t:'Email',d:'jubran@placewrighttalent.com.au'},
             ].map(c=>(
               <div className="ci" key={c.t}><div className="ci-icon">{c.icon}</div><div><strong>{c.t}</strong><p style={{whiteSpace:'pre-line'}}>{c.d}</p></div></div>
             ))}
             <div style={{background:'var(--signal-pale)',border:'1px solid var(--signal-light)',borderRadius:'var(--radius)',padding:20}}>
               <strong style={{color:'var(--ink)',display:'block',marginBottom:7,fontSize:14}}>Employers — Request Workers</strong>
-              <p style={{fontSize:13,color:'var(--gray-dark)',lineHeight:1.7}}>Need warehouse staff fast? Call us directly on 0470 632 701 or email seth@swcstaffingsolutions.com.au for same-day response.</p>
+              <p style={{fontSize:13,color:'var(--gray-dark)',lineHeight:1.7}}>Need warehouse staff fast? Call us directly on 0434 768 164 or email jubran@placewrighttalent.com.au for same-day response.</p>
             </div>
           </div>
           <div className="cf">
@@ -1456,8 +1456,8 @@ function LegalPage({ label, title, intro, sections, setPage }) {
           </div>
         ))}
         <div style={{borderTop:'2px solid var(--ink)',paddingTop:24,marginTop:8}}>
-          <p style={{fontSize:14,color:'var(--gray-dark)',lineHeight:1.7,marginBottom:6}}>Questions about this policy? Contact us at <strong style={{color:'var(--ink)'}}>seth@swcstaffingsolutions.com.au</strong> or call <strong style={{color:'var(--ink)'}}>0470 632 701</strong>.</p>
-          <p style={{fontSize:13,color:'var(--gray-mid)'}}>Placewright Talent · ABN 95 576 836 195 · 100 Harris Street, Pyrmont NSW 2009 · Last updated {new Date().toLocaleDateString('en-AU',{month:'long',year:'numeric'})}.</p>
+          <p style={{fontSize:14,color:'var(--gray-dark)',lineHeight:1.7,marginBottom:6}}>Questions about this policy? Contact us at <strong style={{color:'var(--ink)'}}>jubran@placewrighttalent.com.au</strong> or call <strong style={{color:'var(--ink)'}}>0434 768 164</strong>.</p>
+          <p style={{fontSize:13,color:'var(--gray-mid)'}}>Placewright Talent · ABN 70 276 616 257 · 333 George Street, Sydney NSW 2000 · Last updated {new Date().toLocaleDateString('en-AU',{month:'long',year:'numeric'})}.</p>
           <button className="btn-bk" style={{marginTop:20}} onClick={()=>setPage('home')}>Return Home</button>
         </div>
       </div>
@@ -1512,10 +1512,10 @@ function Footer({ setPage }) {
           </div>
           <div className="ft-col"><h4>Company</h4><a onClick={()=>setPage('about')}>About Us</a><a onClick={()=>setPage('services')}>Our Services</a><a onClick={()=>setPage('jobs')}>Work With Us</a><a onClick={()=>setPage('contact')}>Contact</a></div>
           <div className="ft-col"><h4>Police Checks</h4><a onClick={()=>setPage('police')}>Apply Online</a><a onClick={()=>setPage('police')}>Track Application</a><a onClick={()=>setPage('privacy')}>Privacy Policy</a><a onClick={()=>setPage('fairwork')}>Fair Work Policy</a></div>
-          <div className="ft-col"><h4>Contact</h4><a>seth@swcstaffingsolutions.com.au</a><a>0470 632 701</a><a>100 Harris Street, Pyrmont NSW 2009</a><a>Mon–Fri 8am–5pm AEST</a></div>
+          <div className="ft-col"><h4>Contact</h4><a>jubran@placewrighttalent.com.au</a><a>0434 768 164</a><a>333 George Street, Sydney NSW 2000</a><a>Mon–Fri 8am–5pm AEST</a></div>
         </div>
         <div className="ft-bottom">
-          <p>© 2026 Placewright Talent · ABN 95 576 836 195 · Registered in Sydney</p>
+          <p>© 2026 Placewright Talent · ABN 70 276 616 257 · Registered in Sydney</p>
           <div className="ft-badges">
             <span className="ft-badge">ACIC Accredited</span>
             <span className="ft-badge">Privacy Act Compliant</span>
@@ -1748,7 +1748,7 @@ function ApplyNow({ setPage }) {
       setDone(true);
     } catch(err) {
       console.error(err);
-      setSubmitErr('Something went wrong. Please try again or call us on 0470 632 701.');
+      setSubmitErr('Something went wrong. Please try again or call us on 0434 768 164.');
     } finally {
       setSubmitting(false);
     }
@@ -1759,7 +1759,7 @@ function ApplyNow({ setPage }) {
       <div className="s-icon">✓</div>
       <h2>Application Received!</h2>
       <p>Thanks for applying! Our team will review your details and be in touch as soon as a suitable role becomes available.</p>
-      <p style={{marginTop:8}}>Questions? Call us on <strong>0470 632 701</strong>.</p>
+      <p style={{marginTop:8}}>Questions? Call us on <strong>0434 768 164</strong>.</p>
       <div style={{display:'flex',gap:12,justifyContent:'center',flexWrap:'wrap',marginTop:28}}>
         <button className="btn-n" onClick={()=>{setDone(false);setForm({firstName:'',middleName:'',lastName:'',dob:'',gender:'',email:'',phone:'',address:'',suburb:'',state:'',postcode:'',preferredCity:'',workType:''});}}>Submit Another</button>
         <button className="btn-bk" onClick={()=>setPage('home')}>Return Home</button>
