@@ -1,0 +1,1916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Placewright Talent – Warehouse & Logistics Staffing</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init({ publicKey: 'gyLSmTELTy9TaAXfx' });</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      /* deep midnight-navy ink scale */
+      --ink: #0D1326; --ink-mid: #1A2240; --ink-light: #51607E;
+      /* indigo brand ("signal") replaces the old burnt orange */
+      --signal: #4F46E5; --signal-light: #818CF8; --signal-pale: #EEF0FE;
+      --accent: #06B6D4; --accent-pale: #E2F7FB;
+      --grad: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+      --grad-soft: linear-gradient(135deg, #EEF0FE 0%, #F3EEFE 100%);
+      --white: #FFFFFF; --off-white: #F6F7FB;
+      --gray-light: #E4E7F0; --gray-mid: #9AA3B8; --gray-dark: #5A647C; --text: #1E2638;
+      --success: #0E9F6E; --success-bg: #E6F6EF;
+      --error: #E02424; --error-bg: #FDECEC;
+      --radius: 14px; --radius-sm: 10px;
+      --shadow: 0 8px 24px rgba(13,19,38,0.08);
+      --shadow-lg: 0 24px 56px rgba(13,19,38,0.14);
+      --ring: 0 0 0 4px var(--signal-pale);
+    }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--off-white); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; }
+
+    /* NAV */
+    nav { background: rgba(255,255,255,0.85); backdrop-filter: saturate(180%) blur(12px); padding: 0 48px; display: flex; align-items: center; justify-content: space-between; height: 74px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--gray-light); }
+    .logo { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+    .logo-mark { width: 42px; height: 42px; background: var(--grad); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 700; color: #fff; letter-spacing: 0.01em; box-shadow: 0 6px 16px rgba(79,70,229,0.35); }
+    .logo-text strong { display: block; font-family: 'Sora', sans-serif; font-size: 16px; font-weight: 700; color: var(--ink); letter-spacing: -0.01em; }
+    .logo-text span { font-size: 10px; color: var(--gray-mid); letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600; }
+    .nav-links { display: flex; align-items: center; gap: 2px; }
+    .nb { background: none; border: none; color: var(--gray-dark); font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; padding: 9px 14px; border-radius: 9px; cursor: pointer; transition: all 0.18s; }
+    .nb:hover { color: var(--ink); background: var(--off-white); }
+    .nb.active { color: var(--signal); font-weight: 600; background: var(--signal-pale); }
+    .nb.cta { background: var(--ink); color: #fff; font-weight: 600; margin-left: 12px; padding: 10px 20px; border-radius: 10px; }
+    .nb.cta:hover { background: var(--signal); color: #fff; transform: translateY(-1px); box-shadow: 0 8px 18px rgba(79,70,229,0.3); }
+
+    /* BUTTONS */
+    .btn-p { background: var(--signal); color: #fff; border: none; border-radius: 11px; padding: 14px 30px; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.18s; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 10px 24px rgba(79,70,229,0.28); }
+    .btn-p:hover { background: #4338CA; transform: translateY(-2px); box-shadow: 0 16px 30px rgba(79,70,229,0.36); }
+    .btn-o { background: rgba(255,255,255,0.08); color: var(--off-white); border: 1.5px solid rgba(255,255,255,0.3); border-radius: 11px; padding: 14px 30px; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.18s; }
+    .btn-o:hover { background: #fff; color: var(--ink); border-color: #fff; }
+    .hero .btn-o { color: var(--ink); border-color: var(--gray-light); background: #fff; }
+    .hero .btn-o:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .btn-n { background: var(--ink); color: #fff; border: none; border-radius: 11px; padding: 13px 26px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.18s; }
+    .btn-n:hover { background: var(--signal); transform: translateY(-2px); box-shadow: 0 12px 24px rgba(79,70,229,0.3); }
+    .btn-sub { background: var(--signal); color: #fff; border: none; border-radius: 11px; padding: 14px 30px; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.18s; box-shadow: 0 10px 24px rgba(79,70,229,0.28); }
+    .btn-sub:hover { background: #4338CA; transform: translateY(-2px); }
+    .btn-bk { background: #fff; border: 1.5px solid var(--gray-light); color: var(--gray-dark); font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; padding: 12px 22px; border-radius: 11px; cursor: pointer; transition: all 0.18s; }
+    .btn-bk:hover { border-color: var(--signal); color: var(--signal); }
+
+    /* LAYOUT */
+    .sec { padding: 100px 48px; }
+    .inner { max-width: 1140px; margin: 0 auto; }
+    .lbl { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--signal); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+    .lbl::before { content: ''; width: 26px; height: 2px; border-radius: 2px; background: var(--signal); }
+    .lbl-lt { color: var(--signal-light); }
+    .lbl-lt::before { background: var(--signal-light); }
+    .h1 { font-family: 'Sora', sans-serif; font-size: clamp(32px, 4.2vw, 50px); font-weight: 700; color: var(--ink); line-height: 1.12; margin-bottom: 18px; letter-spacing: -0.02em; }
+    .h1-lt { color: #fff; }
+    .sub { font-size: 17px; color: var(--gray-dark); line-height: 1.75; max-width: 620px; }
+    .sub-lt { color: rgba(255,255,255,0.72); }
+    .divider { height: 1px; background: var(--gray-light); margin: 0 48px; }
+
+    /* HERO */
+    .hero { background: radial-gradient(1200px 600px at 80% -10%, #EDE9FE 0%, transparent 60%), radial-gradient(900px 500px at 0% 0%, #E2F7FB 0%, transparent 55%), var(--off-white); padding: 110px 48px 100px; position: relative; overflow: hidden; }
+    .hero-grid { max-width: 1140px; margin: 0 auto; display: grid; grid-template-columns: 1.15fr 1fr; gap: 64px; align-items: center; position: relative; z-index: 1; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: #fff; border: 1px solid var(--gray-light); color: var(--ink); padding: 8px 16px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 26px; box-shadow: var(--shadow); }
+    .hero h1 { font-family: 'Sora', sans-serif; font-size: clamp(40px, 5.4vw, 66px); font-weight: 800; color: var(--ink); line-height: 1.04; margin-bottom: 24px; letter-spacing: -0.03em; }
+    .hero h1 em { font-style: normal; background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { font-size: 18px; color: var(--gray-dark); max-width: 490px; margin: 0 0 38px; line-height: 1.7; }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .hero-stats > div { padding: 28px 26px; background: #fff; border: 1px solid var(--gray-light); border-radius: var(--radius); box-shadow: var(--shadow); transition: transform 0.18s; }
+    .hero-stats > div:hover { transform: translateY(-4px); }
+    .hs-num { font-family: 'Sora', sans-serif; font-size: 38px; font-weight: 700; background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; letter-spacing: -0.02em; }
+    .hs-lbl { font-size: 13px; color: var(--gray-dark); margin-top: 8px; font-weight: 500; }
+
+    /* TRUST */
+    .trust { background: var(--ink); padding: 20px 48px; display: flex; align-items: center; justify-content: center; gap: 44px; flex-wrap: wrap; }
+    .ti { display: flex; align-items: center; gap: 9px; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: rgba(255,255,255,0.82); }
+    .tdot { width: 7px; height: 7px; border-radius: 50%; background: var(--signal-light); flex-shrink: 0; box-shadow: 0 0 0 4px rgba(129,140,248,0.18); }
+
+    /* CARDS */
+    .cards3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 48px; }
+    .card { background: #fff; border: 1px solid var(--gray-light); border-radius: 18px; padding: 34px 30px; transition: all 0.2s; cursor: pointer; position: relative; }
+    .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: transparent; }
+    .card-icon { width: 54px; height: 54px; border-radius: 14px; background: var(--grad-soft); border: 1px solid var(--signal-pale); display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 22px; }
+    .card h3 { font-family: 'Sora', sans-serif; font-size: 20px; font-weight: 700; color: var(--ink); margin-bottom: 10px; letter-spacing: -0.01em; }
+    .card p { font-size: 14px; color: var(--gray-dark); line-height: 1.7; }
+    .card-link { display: inline-block; margin-top: 18px; font-size: 13px; font-weight: 600; color: var(--signal); }
+    .card-link:hover { text-decoration: underline; }
+
+    /* GRID 2COL */
+    .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+
+    /* ABOUT */
+    .about-vis { background: var(--grad); border-radius: 24px; height: 420px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; box-shadow: var(--shadow-lg); }
+    .about-vis::before { content:''; position: absolute; inset:0; opacity:0.5; background-image: radial-gradient(rgba(255,255,255,0.18) 1px, transparent 1px); background-size:22px 22px; }
+    .about-vis::after { content:''; position:absolute; width:340px; height:340px; border-radius:50%; background:rgba(255,255,255,0.12); top:-120px; right:-100px; }
+    .av-inner { text-align: center; position: relative; z-index: 1; }
+    .av-year { font-family: 'Sora', sans-serif; font-size: 92px; font-weight: 800; color: #fff; line-height: 1; display: block; letter-spacing: -0.03em; }
+    .av-sub { font-size: 14px; color: rgba(255,255,255,0.8); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }
+    .av-badge { position: absolute; bottom: -20px; right: -16px; background: #fff; border-radius: 16px; padding: 18px 24px; box-shadow: var(--shadow-lg); }
+    .av-badge strong { display: block; font-family: 'Sora', sans-serif; font-size: 28px; font-weight: 700; color: var(--signal); }
+    .av-badge span { font-size: 12px; color: var(--gray-dark); font-weight: 600; }
+    .vals { display: flex; flex-direction: column; gap: 16px; margin-top: 28px; }
+    .val { display: flex; gap: 13px; align-items: flex-start; }
+    .val-check { width: 24px; height: 24px; border-radius: 8px; background: var(--success-bg); display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; margin-top: 2px; color: var(--success); font-weight: 700; }
+    .val strong { font-size: 14px; font-weight: 600; color: var(--ink); display: block; margin-bottom: 2px; }
+    .val span { font-size: 13px; color: var(--gray-dark); line-height: 1.6; }
+
+    /* TEAM */
+    .team-card { background: #fff; border: 1px solid var(--gray-light); border-radius: 18px; overflow: hidden; transition: all 0.2s; }
+    .team-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+    .team-av { height: 160px; display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-size: 52px; font-weight: 700; }
+    .team-info { padding: 22px 24px; }
+    .team-info h4 { font-family: 'Sora', sans-serif; font-size: 17px; font-weight: 700; color: var(--ink); }
+    .team-info .role { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--signal); font-weight: 600; margin: 5px 0 10px; }
+    .team-info p { font-size: 13px; color: var(--gray-dark); line-height: 1.7; }
+
+    /* POLICE CHECK */
+    .pc-hero { background: radial-gradient(900px 500px at 90% -20%, rgba(124,58,237,0.5) 0%, transparent 55%), var(--ink); padding: 84px 48px; }
+    .pc-hi { max-width: 1140px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+    .pc-hi h2 { font-family: 'Sora', sans-serif; font-size: clamp(30px,4vw,44px); font-weight: 700; color: #fff; margin-bottom: 14px; letter-spacing: -0.02em; }
+    .pc-hi > div > p { font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 26px; }
+    .pc-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pc-pill { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.9); padding: 7px 15px; border-radius: 999px; font-size: 12px; font-weight: 500; }
+    .pc-card { background: #fff; border-radius: 20px; padding: 34px; box-shadow: var(--shadow-lg); }
+    .pc-card h3 { font-family: 'Sora', sans-serif; font-size: 19px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+    .pc-card > p { font-size: 14px; color: var(--gray-dark); margin-bottom: 22px; }
+    .pc-steps { display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px; }
+    .pc-step { display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--gray-dark); }
+    .pc-sn { width: 28px; height: 28px; border-radius: 50%; background: var(--signal-pale); color: var(--signal); font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+    /* TABS */
+    .tabs { background: #fff; border-bottom: 1px solid var(--gray-light); padding: 0 48px; display: flex; }
+    .tab-btn { background: none; border: none; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; padding: 18px 22px; cursor: pointer; color: var(--gray-mid); border-bottom: 2.5px solid transparent; transition: all 0.18s; margin-bottom: -1px; }
+    .tab-btn.active { color: var(--signal); border-bottom-color: var(--signal); }
+    .tab-btn:hover:not(.active) { color: var(--ink); }
+
+    /* FORM */
+    .form-wrap { background: #fff; border: 1px solid var(--gray-light); border-radius: 20px; box-shadow: var(--shadow-lg); overflow: hidden; margin-top: 40px; }
+    .form-hdr { background: var(--ink); padding: 28px 32px; display: flex; align-items: center; justify-content: space-between; }
+    .form-hdr h3 { font-family: 'Sora', sans-serif; color: #fff; font-size: 19px; font-weight: 700; }
+    .form-hdr p { color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 3px; }
+    .prog { display: flex; gap: 6px; }
+    .prog-pip { height: 6px; width: 34px; border-radius: 999px; background: rgba(255,255,255,0.18); transition: background 0.3s; }
+    .prog-pip.done { background: var(--signal-light); }
+    .prog-pip.active { background: #fff; }
+    .form-body { padding: 34px 32px; }
+    .fg { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .fg-full { grid-column: 1 / -1; }
+    .fgrp { display: flex; flex-direction: column; gap: 6px; }
+    label { font-size: 13px; font-weight: 600; color: var(--ink); }
+    label .req { color: var(--error); }
+    input, select, textarea { font-family: 'Inter', sans-serif; font-size: 14px; padding: 12px 14px; border: 1.5px solid var(--gray-light); border-radius: 10px; background: var(--off-white); color: var(--text); transition: all 0.18s; outline: none; width: 100%; }
+    input:focus, select:focus, textarea:focus { border-color: var(--signal); background: #fff; box-shadow: var(--ring); }
+    input.ferr-i { border-color: var(--error); }
+    .ferr { font-size: 12px; color: var(--error); }
+    textarea { resize: vertical; min-height: 80px; }
+    .info-b { background: var(--accent-pale); border: 1px solid #BFEAF2; border-radius: 12px; padding: 13px 15px; font-size: 13px; color: #0E7490; margin-bottom: 22px; }
+    .upload-z { border: 1.5px dashed var(--gray-mid); border-radius: 12px; padding: 32px; text-align: center; cursor: pointer; transition: all 0.18s; background: var(--off-white); }
+    .upload-z:hover, .upload-z.drag { border-color: var(--signal); background: var(--signal-pale); }
+    .upload-z h4 { font-size: 15px; font-weight: 600; color: var(--ink); margin: 10px 0 5px; }
+    .upload-z p { font-size: 13px; color: var(--gray-mid); }
+    .upload-z input { display: none; }
+    .up-file { display: flex; align-items: center; justify-content: space-between; background: var(--success-bg); border: 1px solid #B6E3CF; border-radius: 10px; padding: 12px 14px; margin-top: 10px; }
+    .up-file span { font-size: 13px; color: var(--success); font-weight: 600; }
+    .up-rem { background: none; border: none; color: var(--error); cursor: pointer; font-size: 17px; }
+    .consent-b { background: var(--grad-soft); border: 1px solid var(--signal-pale); border-radius: 14px; padding: 24px; margin-top: 18px; }
+    .consent-b h4 { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+    .consent-b > p { font-size: 13px; color: var(--gray-dark); line-height: 1.7; margin-bottom: 14px; }
+    .chk-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+    .chk-row input[type=checkbox] { width: 16px; height: 16px; margin-top: 2px; accent-color: var(--signal); flex-shrink: 0; }
+    .chk-row label { font-size: 13px; font-weight: 400; color: var(--gray-dark); cursor: pointer; }
+    .form-nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 32px; border-top: 1px solid var(--gray-light); background: var(--off-white); }
+
+    /* STATUS */
+    .status-search { background: #fff; border: 1px solid var(--gray-light); border-radius: 16px; padding: 26px; display: flex; gap: 12px; align-items: flex-end; margin-top: 32px; box-shadow: var(--shadow); }
+    .status-res { background: #fff; border: 1px solid var(--gray-light); border-radius: 16px; padding: 28px; margin-top: 18px; box-shadow: var(--shadow); }
+    .tl-item { display: flex; gap: 14px; margin-bottom: 22px; }
+    .tl-dot { width: 15px; height: 15px; border-radius: 50%; flex-shrink: 0; margin-top: 3px; position: relative; }
+    .tl-dot::after { content: ''; position: absolute; left: 50%; top: 100%; transform: translateX(-50%); width: 2px; height: 26px; background: var(--gray-light); }
+    .tl-item:last-child .tl-dot::after { display: none; }
+    .tl-dot.done { background: var(--success); }
+    .tl-dot.active { background: var(--signal); box-shadow: 0 0 0 4px var(--signal-pale); }
+    .tl-dot.pend { background: var(--gray-light); }
+    .tl-txt h4 { font-size: 14px; font-weight: 600; }
+    .tl-txt p { font-size: 13px; color: var(--gray-mid); margin-top: 2px; }
+    .sbadge { display: inline-block; padding: 5px 12px; border-radius: 999px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+    .sbadge.complete { background: var(--success-bg); color: var(--success); }
+    .sbadge.processing { background: #FEF3C7; color: #92600A; }
+    .sbadge.pending { background: var(--gray-light); color: var(--gray-dark); }
+
+    /* ADMIN */
+    .adm-bar { background: var(--ink); padding: 22px 32px; display: flex; align-items: center; justify-content: space-between; }
+    .adm-bar h2 { font-family: 'Sora', sans-serif; color: #fff; font-size: 19px; font-weight: 700; }
+    .adm-bar span { color: rgba(255,255,255,0.55); font-size: 13px; }
+    .adm-stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; padding: 24px 32px; }
+    .stat-c { background: #fff; border: 1px solid var(--gray-light); border-radius: 14px; padding: 22px; box-shadow: var(--shadow); }
+    .stat-c .sn { font-family: 'Sora', sans-serif; font-size: 30px; font-weight: 700; color: var(--ink); }
+    .stat-c .sl { font-size: 13px; color: var(--gray-mid); margin-top: 3px; }
+    .stat-c .sd { font-size: 12px; font-weight: 600; margin-top: 5px; color: var(--success); }
+    .tbl-wrap { padding: 0 32px 32px; }
+    .tbl-ctrl { display: flex; gap: 10px; margin-bottom: 12px; }
+    .ts { flex: 1; max-width: 280px; padding: 10px 14px; border: 1.5px solid var(--gray-light); border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 14px; outline: none; }
+    .tf { padding: 10px 14px; border: 1.5px solid var(--gray-light); border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 14px; background: #fff; cursor: pointer; outline: none; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th { text-align: left; padding: 11px 14px; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--gray-dark); border-bottom: 1px solid var(--gray-light); background: var(--off-white); }
+    td { padding: 13px 14px; border-bottom: 1px solid var(--gray-light); vertical-align: middle; }
+    tr:hover td { background: var(--signal-pale); }
+    .abtn { background: #fff; border: 1.5px solid var(--gray-light); border-radius: 9px; padding: 6px 12px; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; cursor: pointer; color: var(--ink); transition: all 0.18s; }
+    .abtn:hover { background: var(--signal); color: #fff; border-color: var(--signal); }
+
+    /* CONTACT */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 48px; }
+    .ci { display: flex; gap: 14px; align-items: flex-start; }
+    .ci-icon { width: 46px; height: 46px; border-radius: 12px; background: var(--grad-soft); border: 1px solid var(--signal-pale); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .ci strong { display: block; font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+    .ci p { font-size: 13px; color: var(--gray-dark); line-height: 1.6; }
+    .cf { background: #fff; border: 1px solid var(--gray-light); border-radius: 20px; padding: 34px; box-shadow: var(--shadow-lg); }
+    .cf h3 { font-family: 'Sora', sans-serif; font-size: 21px; font-weight: 700; color: var(--ink); margin-bottom: 22px; }
+
+    /* SUCCESS */
+    .success-sc { text-align: center; padding: 72px 40px; max-width: 520px; margin: 0 auto; }
+    .s-icon { width: 78px; height: 78px; border-radius: 22px; background: var(--success-bg); display: flex; align-items: center; justify-content: center; font-size: 34px; margin: 0 auto 22px; color: var(--success); }
+    .success-sc h2 { font-family: 'Sora', sans-serif; font-size: 30px; font-weight: 700; color: var(--ink); margin-bottom: 12px; letter-spacing: -0.02em; }
+    .success-sc p { color: var(--gray-dark); font-size: 15px; line-height: 1.7; margin-bottom: 8px; }
+    .ref-b { background: var(--grad-soft); border: 1px solid var(--signal-pale); border-radius: 14px; padding: 20px; margin: 22px 0; }
+    .ref-b span { font-size: 11px; color: var(--gray-dark); display: block; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
+    .ref-b strong { font-size: 22px; color: var(--signal); font-family: 'Sora', monospace; letter-spacing: 0.08em; }
+
+    /* FOOTER */
+    footer { background: var(--ink); padding: 64px 48px 28px; border-top: 3px solid var(--signal); }
+    .ft-inner { max-width: 1140px; margin: 0 auto; }
+    .ft-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 44px; margin-bottom: 44px; }
+    .ft-brand p { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.7; margin-top: 14px; max-width: 250px; }
+    .ft-brand .logo-text strong { color: #fff; }
+    .ft-col h4 { font-size: 11px; font-weight: 700; color: var(--signal-light); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 15px; }
+    .ft-col a { display: block; font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; margin-bottom: 10px; cursor: pointer; transition: color 0.18s; }
+    .ft-col a:hover { color: #fff; }
+    .ft-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .ft-bottom p { font-size: 12px; color: rgba(255,255,255,0.5); }
+    .ft-badges { display: flex; gap: 8px; }
+    .ft-badge { font-size: 11px; font-weight: 600; padding: 5px 11px; border-radius: 999px; border: 1px solid rgba(129,140,248,0.4); color: var(--signal-light); }
+
+    /* STATS MINI GRID */
+    .mini-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .mini-stat { background: #fff; border: 1px solid var(--gray-light); border-radius: 16px; padding: 24px 20px; box-shadow: var(--shadow); transition: transform 0.18s; }
+    .mini-stat:hover { transform: translateY(-4px); }
+    .mini-stat .mn { font-family: 'Sora', sans-serif; font-size: 28px; font-weight: 700; background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 6px; }
+    .mini-stat .ml { font-size: 13px; color: var(--gray-dark); line-height: 1.5; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; }
+      .nav-links .nb:not(.cta) { display: none; }
+      .hero, .sec { padding: 68px 22px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 44px; }
+      .pc-hero { padding: 64px 22px; }
+      .trust { padding: 18px 22px; gap: 20px; }
+      .divider { margin: 0 22px; }
+      .cards3, .ft-grid { grid-template-columns: 1fr; }
+      .g2, .pc-hi, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-vis { height: 280px; }
+      .av-badge { bottom: -16px; right: 14px; }
+      .adm-stats, .mini-stats { grid-template-columns: 1fr 1fr; }
+      .fg { grid-template-columns: 1fr; }
+      .form-body { padding: 24px 18px; }
+      .form-nav { padding: 16px 18px; }
+      .team-card { grid-template-columns: 1fr !important; }
+    }
+
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState } = React;
+
+/*
+ * SECURITY NOTE
+ * -------------
+ * Reference numbers double as upload-folder names and tracker lookup keys,
+ * so they must be unguessable. This uses crypto.getRandomValues (~40 bits
+ * of entropy) instead of a small sequential/random number.
+ */
+const genRef = () => {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  const buf = new Uint32Array(8);
+  crypto.getRandomValues(buf);
+  let s = '';
+  for (let i = 0; i < 8; i++) s += chars[buf[i] % chars.length];
+  return `PWT-${new Date().getFullYear()}-${s}`;
+};
+
+/* ── NAV ── */
+function Nav({ page, setPage }) {
+  const links = [['home','Home'],['about','About Us'],['services','Services'],['jobs','Work With Us'],['contact','Contact']];
+  return (
+    <nav>
+      <div className="logo" onClick={() => setPage('home')}>
+        <div className="logo-mark">PWT</div>
+        <div className="logo-text"><strong>Placewright Talent</strong><span>Warehouse &amp; Logistics</span></div>
+      </div>
+      <div className="nav-links">
+        {links.map(([id,lbl]) => <button key={id} className={`nb${page===id?' active':''}`} onClick={() => setPage(id)}>{lbl}</button>)}
+        <button className="nb cta" onClick={() => setPage('police')}>Apply for Check</button>
+      </div>
+    </nav>
+  );
+}
+
+/* ── HOME ── */
+function Home({ setPage }) {
+  return (<>
+    <div className="hero">
+      <div className="hero-grid">
+        <div>
+          <div className="hero-badge">◆ Sydney Founded · Australia-Wide</div>
+          <h1>Your Workforce Partner for <em>Warehouse &amp; Logistics</em></h1>
+          <p>We connect reliable, background-checked workers with Australia's leading warehouse and distribution operations. Fast, trusted, compliant.</p>
+          <div className="hero-btns">
+            <button className="btn-p" onClick={() => setPage('jobs')}>Find Work →</button>
+            <button className="btn-o" onClick={() => setPage('contact')}>Hire Staff</button>
+          </div>
+        </div>
+        <div className="hero-stats">
+          {[['500+','Workers Placed'],['60+','Warehouse Partners'],['6','States Covered'],['1–2','Day Check Turnaround']].map(([n,l]) => (
+            <div key={l}><div className="hs-num">{n}</div><div className="hs-lbl">{l}</div></div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div className="trust">
+      {['ACIC Accredited Provider','Australian Privacy Act Compliant','WorkSafe Certified','Fair Work Compliant'].map(t => (
+        <div className="ti" key={t}><div className="tdot"/>{t}</div>
+      ))}
+    </div>
+
+    <div className="sec" style={{background:'var(--white)'}}>
+      <div className="inner">
+        <div className="lbl">What We Do</div>
+        <div className="h1">Staffing Built for Warehouses</div>
+        <p className="sub">From pick-and-pack to forklift operations, we specialise exclusively in warehouse and logistics staffing — so we understand your environment better than anyone.</p>
+        <div className="cards3" style={{marginTop:44}}>
+          {[
+            {icon:'👷',title:'Labour Hire',desc:'Casual, temp, and permanent warehouse workers. Pre-screened, trained, and ready to start. Available across all major metro areas.', page:'services'},
+            {icon:'🔒',title:'Police Checks',desc:'ACIC-accredited National Police Checks processed entirely online. Results in 1–2 business days, delivered to you and your employer.', page:'police'},
+            {icon:'📋',title:'Compliance',desc:"We handle right-to-work verification, onboarding documentation, WHS inductions, and ongoing compliance monitoring so you don't have to.", page:'services'},
+          ].map(s => (
+            <div className="card" key={s.title} onClick={() => setPage(s.page)}>
+              <div className="card-icon">{s.icon}</div>
+              <h3>{s.title}</h3><p>{s.desc}</p>
+              <span className="card-link">Learn more →</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div className="divider"/>
+
+    <div className="sec">
+      <div className="inner g2">
+        <div>
+          <div className="lbl">Why Choose Us</div>
+          <div className="h1">We Only Do Warehouses. That's Our Edge.</div>
+          <p style={{fontSize:15,color:'var(--gray-dark)',lineHeight:1.8,marginBottom:28}}>Founded in Sydney by Seth William Curry, Placewright Talent was built by someone who's worked on warehouse floors. We know the difference between a picker-packer and a reach truck operator — and we staff accordingly.</p>
+          <button className="btn-n" onClick={() => setPage('about')}>Our Story →</button>
+        </div>
+        <div className="mini-stats">
+          {[['< 24h','Average fill time for urgent shifts'],['98%','Worker show-up rate across all sites'],['4.9★','Average employer satisfaction rating'],['100%','Police-checked workforce, every time']].map(([n,l]) => (
+            <div className="mini-stat" key={l}><div className="mn">{n}</div><div className="ml">{l}</div></div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div className="sec" style={{background:'var(--ink)',textAlign:'center'}}>
+      <div className="inner">
+        <div className="lbl lbl-lt">Ready to Get Started?</div>
+        <h2 style={{fontFamily:"'Sora',sans-serif",fontSize:'clamp(26px,4vw,42px)',color:'var(--white)',marginBottom:14}}>Need Workers? Need a Police Check?</h2>
+        <p style={{fontSize:16,color:'rgba(255,255,255,0.6)',maxWidth:500,margin:'0 auto 32px',lineHeight:1.7}}>Whether you're an employer looking for staff or a worker starting a new role, we've got you covered.</p>
+        <div style={{display:'flex',gap:14,justifyContent:'center',flexWrap:'wrap'}}>
+          <button className="btn-p" onClick={() => setPage('contact')}>Get in Touch</button>
+          <button className="btn-o" onClick={() => setPage('police')}>Start a Police Check Application</button>
+        </div>
+      </div>
+    </div>
+  </>);
+}
+
+/* ── ABOUT ── */
+function About({ setPage }) {
+  return (<>
+    <div className="sec" style={{background:'var(--ink)',paddingBottom:64}}>
+      <div className="inner">
+        <div className="lbl lbl-lt">About Us</div>
+        <div className="h1 h1-lt">Born in Sydney. Built for Warehouses.</div>
+        <p className="sub sub-lt">We started Placewright Talent because the warehouse industry deserved a staffing partner that actually understood it.</p>
+      </div>
+    </div>
+
+    <div className="sec" style={{background:'var(--white)'}}>
+      <div className="inner g2">
+        <div style={{position:'relative'}}>
+          <div className="about-vis">
+            <div className="av-inner">
+              <span className="av-year">2026</span>
+              <span className="av-sub">Founded in Sydney</span>
+            </div>
+          </div>
+          <div className="av-badge">
+            <strong>500+</strong><span>Workers Placed</span>
+          </div>
+        </div>
+        <div>
+          <div className="lbl">Our Story</div>
+          <div className="h1" style={{fontSize:'clamp(24px,3vw,36px)'}}>We Started Because the Industry Needed Better</div>
+          <p style={{fontSize:15,color:'var(--gray-dark)',lineHeight:1.8,marginBottom:14}}>Placewright Talent was founded in Sydney in 2026 by Managing Director Seth William Curry, bringing years of experience in warehouse operations, logistics, and workforce compliance — with one goal: getting people into their dream jobs.</p>
+          <p style={{fontSize:15,color:'var(--gray-dark)',lineHeight:1.8,marginBottom:14}}>We saw firsthand how generic recruitment agencies struggled to understand warehouse environments — sending under-qualified workers, skipping background checks, and leaving employers to deal with the fallout. So we built something different.</p>
+          <p style={{fontSize:15,color:'var(--gray-dark)',lineHeight:1.8,marginBottom:24}}>From day one, we focused exclusively on warehouse and logistics staffing. That specialisation means we speak your language, understand your risks, and staff your floors with people who are ready to work.</p>
+          <div className="vals">
+            {[
+              {t:'Specialisation',d:'We only do warehouse and logistics. No offices, no retail, no compromise.'},
+              {t:'Compliance first',d:'Every worker is police-checked, right-to-work verified, and WHS inducted before placement.'},
+              {t:'Speed without shortcuts',d:'We fill shifts fast — but never at the expense of quality or safety.'},
+            ].map(v => (
+              <div className="val" key={v.t}>
+                <div className="val-check">✓</div>
+                <div><strong>{v.t}</strong><span>{v.d}</span></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div className="divider"/>
+
+    <div className="sec">
+      <div className="inner">
+        <div className="lbl">Leadership</div>
+        <div className="h1">The Person Behind Placewright Talent</div>
+        <p className="sub" style={{marginBottom:44}}>Real warehouse and logistics experience — not just recruitment.</p>
+        <div style={{maxWidth:820,margin:'0 auto'}}>
+          {[
+            {init:'PWT',name:'Seth William Curry',role:'Managing Director',bg:'linear-gradient(135deg,#4F46E5,#7C3AED)',tc:'#ffffff',bio:'Seth has spent years in the warehouse and logistics staffing industry, and founded Placewright Talent to expand horizons — connecting good people with their dream jobs, and giving employers a partner who genuinely understands the floor.'},
+          ].map(t => (
+            <div className="team-card" key={t.name} style={{display:'grid',gridTemplateColumns:'220px 1fr'}}>
+              <div className="team-av" style={{background:t.bg,color:t.tc,height:'100%',minHeight:180,fontSize:44}}>{t.init}</div>
+              <div className="team-info" style={{padding:'28px 32px'}}><h4 style={{fontSize:20}}>{t.name}</h4><div className="role">{t.role}</div><p style={{fontSize:14.5}}>{t.bio}</p></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div className="divider"/>
+
+    <div className="sec" style={{background:'var(--white)',textAlign:'center'}}>
+      <div className="inner">
+        <div className="lbl">Where We Operate</div>
+        <div className="h1">Australia-Wide Coverage</div>
+        <p className="sub" style={{margin:'0 auto 36px'}}>Headquartered in Sydney with active placements in all major warehousing hubs.</p>
+        <div style={{display:'flex',flexWrap:'wrap',gap:10,justifyContent:'center',marginBottom:36}}>
+          {['Sydney (HQ)','Melbourne','Brisbane','Perth','Adelaide','Canberra','Gold Coast','Newcastle'].map(c => (
+            <div key={c} style={{background:c.includes('HQ')?'var(--ink)':'var(--off-white)',color:c.includes('HQ')?'var(--signal-light)':'var(--text)',border:'1px solid var(--gray-light)',borderRadius:8,padding:'9px 18px',fontSize:14,fontWeight:600}}>{c}</div>
+          ))}
+        </div>
+        <button className="btn-n" onClick={() => setPage('contact')}>Get in Touch →</button>
+      </div>
+    </div>
+  </>);
+}
+
+/* ── SERVICES ── */
+function Services({ setPage }) {
+  const services = [
+    {icon:'👷',title:'Labour Hire',tag:'Most Popular',desc:"Flexible, on-demand warehouse workers for casual, temp-to-perm, and permanent roles. All workers are pre-screened, police-checked, and WHS inducted before placement.",points:['Pick & pack operators','Forklift operators (LF, LO, LC licenced)','Reach truck drivers','RF scanning & order selection','Dispatchers & storepersons','Inventory & cycle count staff']},
+    {icon:'🔒',title:'Police Check Processing',tag:'ACIC Accredited',desc:"Fast, fully online National Police Checks for all your new starters. We're an accredited body with the ACIC and comply fully with the Privacy Act 1988.",points:['Results in 1–2 business days','Secure online application portal','Certificate issued directly to employer','Privacy Act 1988 compliant','Covers all Australian states & territories','Suitable for warehouse, transport & logistics roles']},
+    {icon:'📋',title:'Workforce Compliance',tag:'End-to-End',desc:"Let us handle the paperwork. We manage all onboarding compliance so you can focus on running your warehouse, not chasing documentation.",points:['Right-to-work verification (visa checks)','Fair Work Act compliance','WHS site inductions','TFN and super fund documentation','Ongoing licence verification (forklift, etc.)','Incident reporting support']},
+  ];
+  return (<>
+    <div className="sec" style={{background:'var(--ink)',paddingBottom:64}}>
+      <div className="inner">
+        <div className="lbl lbl-lt">What We Offer</div>
+        <div className="h1 h1-lt">Staffing Services for Every Warehouse Need</div>
+        <p className="sub sub-lt">From single-day casual shifts to permanent placements, we have a solution that fits.</p>
+      </div>
+    </div>
+    <div className="sec" style={{background:'var(--white)'}}>
+      <div className="inner">
+        {services.map((s,i) => (
+          <div key={s.title} style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:56,alignItems:'center',marginBottom:i<2?72:0}}>
+            {i%2===0 ? <>
+              <div>
+                <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:14}}>
+                  <div className="card-icon" style={{margin:0}}>{s.icon}</div>
+                  <span style={{background:'var(--signal-pale)',color:'var(--signal)',border:'1.5px solid var(--signal)',padding:'5px 13px',borderRadius:999,fontSize:12,fontWeight:700}}>{s.tag}</span>
+                </div>
+                <h3 style={{fontFamily:"'Sora',sans-serif",fontSize:28,color:'var(--ink)',marginBottom:12}}>{s.title}</h3>
+                <p style={{fontSize:15,color:'var(--gray-dark)',lineHeight:1.8,marginBottom:22}}>{s.desc}</p>
+                <button className="btn-n" onClick={() => s.title.includes('Police')?setPage('police'):setPage('contact')}>{s.title.includes('Police')?'Apply for a Check →':'Get a Quote →'}</button>
+              </div>
+              <div style={{background:'var(--off-white)',border:'1px solid var(--gray-light)',borderRadius:6,padding:28}}>
+                <h4 style={{fontSize:13,fontWeight:700,color:'var(--ink)',marginBottom:14,textTransform:'uppercase',letterSpacing:'0.05em'}}>Includes</h4>
+                {s.points.map(p=><div key={p} style={{display:'flex',gap:9,marginBottom:10,fontSize:14,color:'var(--gray-dark)'}}><span style={{color:'var(--success)',fontWeight:700}}>✓</span>{p}</div>)}
+              </div>
+            </> : <>
+              <div style={{background:'var(--off-white)',border:'1px solid var(--gray-light)',borderRadius:6,padding:28}}>
+                <h4 style={{fontSize:13,fontWeight:700,color:'var(--ink)',marginBottom:14,textTransform:'uppercase',letterSpacing:'0.05em'}}>Includes</h4>
+                {s.points.map(p=><div key={p} style={{display:'flex',gap:9,marginBottom:10,fontSize:14,color:'var(--gray-dark)'}}><span style={{color:'var(--success)',fontWeight:700}}>✓</span>{p}</div>)}
+              </div>
+              <div>
+                <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:14}}>
+                  <div className="card-icon" style={{margin:0}}>{s.icon}</div>
+                  <span style={{background:'var(--signal-pale)',color:'var(--signal)',border:'1.5px solid var(--signal)',padding:'5px 13px',borderRadius:999,fontSize:12,fontWeight:700}}>{s.tag}</span>
+                </div>
+                <h3 style={{fontFamily:"'Sora',sans-serif",fontSize:28,color:'var(--ink)',marginBottom:12}}>{s.title}</h3>
+                <p style={{fontSize:15,color:'var(--gray-dark)',lineHeight:1.8,marginBottom:22}}>{s.desc}</p>
+                <button className="btn-n" onClick={() => s.title.includes('Police')?setPage('police'):setPage('contact')}>{s.title.includes('Police')?'Apply for a Check →':'Get a Quote →'}</button>
+              </div>
+            </>}
+          </div>
+        ))}
+      </div>
+    </div>
+  </>);
+}
+
+/* ── JOBS PAGE ── */
+function Jobs({ setPage }) {
+  const [done, setDone] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitErr, setSubmitErr] = useState('');
+  const [form, setForm] = useState({
+    firstName:'', middleName:'', lastName:'', dob:'', gender:'',
+    email:'', phone:'', address:'', suburb:'', state:'', postcode:'',
+    preferredCity:'', workType:'',
+  });
+  const [errs, setErrs] = useState({});
+  const upd = (k,v) => setForm(f=>({...f,[k]:v}));
+
+  const validate = () => {
+    const e = {};
+    if(!form.firstName.trim()) e.firstName = 'Required';
+    if(!form.lastName.trim()) e.lastName = 'Required';
+    if(!form.dob) e.dob = 'Required';
+    if(!form.email.includes('@')) e.email = 'Valid email required';
+    if(!form.phone.trim()) e.phone = 'Required';
+    if(!form.address.trim()) e.address = 'Required';
+    if(!form.suburb.trim()) e.suburb = 'Required';
+    if(!form.state) e.state = 'Required';
+    if(!form.postcode.trim()) e.postcode = 'Required';
+    if(!form.preferredCity) e.preferredCity = 'Required';
+    if(!form.workType) e.workType = 'Required';
+    setErrs(e);
+    return Object.keys(e).length === 0;
+  };
+
+  const submit = async () => {
+    if(!validate()) return;
+    setSubmitting(true);
+    setSubmitErr('');
+    try {
+      await sb.insert('job_applications', {
+        first_name: form.firstName,
+        middle_name: form.middleName,
+        last_name: form.lastName,
+        dob: form.dob,
+        gender: form.gender,
+        email: form.email,
+        phone: form.phone,
+        address: form.address,
+        suburb: form.suburb,
+        state: form.state,
+        postcode: form.postcode,
+        preferred_city: form.preferredCity,
+        work_type: form.workType,
+        status: 'new',
+      });
+      // Send email notification
+      try {
+        await emailjs.send('personnelstaffingaus', 'template_w3e2d1k', {
+          name: `${form.firstName} ${form.middleName} ${form.lastName}`.trim(),
+          email: form.email,
+          phone: form.phone,
+          city: form.preferredCity,
+          work_type: form.workType,
+        });
+      } catch(emailErr) { console.warn('Email notification failed:', emailErr); }
+
+      setDone(true);
+    } catch(err) {
+      console.error(err);
+      setSubmitErr('Something went wrong. Please try again or call us on 0470 632 701.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  if(done) return (
+    <div className="success-sc" style={{paddingTop:80}}>
+      <div className="s-icon">✓</div>
+      <h2>Application Received!</h2>
+      <p>Thanks for your interest in working with Placewright Talent. We'll be in touch as soon as a suitable role becomes available.</p>
+      <p style={{marginTop:8}}>In the meantime, if you have any questions call us on <strong>0470 632 701</strong>.</p>
+      <div style={{display:'flex',gap:12,justifyContent:'center',flexWrap:'wrap',marginTop:28}}>
+        <button className="btn-n" onClick={()=>{setDone(false);setForm({firstName:'',middleName:'',lastName:'',dob:'',gender:'',email:'',phone:'',address:'',suburb:'',state:'',postcode:'',preferredCity:'',workType:''});}}>Submit Another</button>
+        <button className="btn-bk" onClick={()=>setPage('home')}>Return Home</button>
+      </div>
+    </div>
+  );
+
+  return (<>
+    <div className="sec" style={{background:'var(--ink)',paddingBottom:64}}>
+      <div className="inner">
+        <div className="lbl lbl-lt">Work With Us</div>
+        <div className="h1 h1-lt">Register Your Interest</div>
+        <p className="sub sub-lt">We place workers in warehouses across Australia. Fill in your details below and we'll be in touch when a role that suits you becomes available.</p>
+      </div>
+    </div>
+
+    <div className="sec" style={{background:'var(--white)'}}>
+      <div className="inner" style={{maxWidth:780}}>
+        <div className="form-wrap">
+          <div className="form-hdr">
+            <div>
+              <h3>Job Interest Form</h3>
+              <p>All fields marked * are required. Your details are kept private and secure.</p>
+            </div>
+          </div>
+          <div className="form-body">
+            <div className="info-b">ℹ️ Enter your details exactly as they appear on your ID. We'll contact you when a suitable role is available.</div>
+
+            <div style={{fontSize:13,fontWeight:700,color:'var(--ink)',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:14}}>Personal Details</div>
+            <div className="fg" style={{marginBottom:20}}>
+              <div className="fgrp"><label>First Name <span className="req">*</span></label><input value={form.firstName} onChange={e=>upd('firstName',e.target.value)} className={errs.firstName?'ferr-i':''}/>{errs.firstName&&<span className="ferr">{errs.firstName}</span>}</div>
+              <div className="fgrp"><label>Middle Name</label><input value={form.middleName} onChange={e=>upd('middleName',e.target.value)} placeholder="If applicable"/></div>
+              <div className="fgrp"><label>Last Name <span className="req">*</span></label><input value={form.lastName} onChange={e=>upd('lastName',e.target.value)} className={errs.lastName?'ferr-i':''}/>{errs.lastName&&<span className="ferr">{errs.lastName}</span>}</div>
+              <div className="fgrp"><label>Date of Birth <span className="req">*</span></label><input type="date" value={form.dob} onChange={e=>upd('dob',e.target.value)} className={errs.dob?'ferr-i':''}/>{errs.dob&&<span className="ferr">{errs.dob}</span>}</div>
+              <div className="fgrp"><label>Gender</label><select value={form.gender} onChange={e=>upd('gender',e.target.value)}><option value="">Prefer not to say</option>{['Male','Female','Non-binary','Other'].map(g=><option key={g}>{g}</option>)}</select></div>
+              <div className="fgrp"><label>Email <span className="req">*</span></label><input type="email" value={form.email} onChange={e=>upd('email',e.target.value)} className={errs.email?'ferr-i':''} placeholder="your@email.com"/>{errs.email&&<span className="ferr">{errs.email}</span>}</div>
+              <div className="fgrp"><label>Mobile <span className="req">*</span></label><input type="tel" value={form.phone} onChange={e=>upd('phone',e.target.value)} className={errs.phone?'ferr-i':''} placeholder="04XX XXX XXX"/>{errs.phone&&<span className="ferr">{errs.phone}</span>}</div>
+            </div>
+
+            <div style={{fontSize:13,fontWeight:700,color:'var(--ink)',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:14,paddingTop:16,borderTop:'1px solid var(--gray-light)'}}>Home Address</div>
+            <div className="fg" style={{marginBottom:20}}>
+              <div className="fgrp fg-full"><label>Street Address <span className="req">*</span></label><input value={form.address} onChange={e=>upd('address',e.target.value)} className={errs.address?'ferr-i':''} placeholder="Street number and name"/>{errs.address&&<span className="ferr">{errs.address}</span>}</div>
+              <div className="fgrp"><label>Suburb <span className="req">*</span></label><input value={form.suburb} onChange={e=>upd('suburb',e.target.value)} className={errs.suburb?'ferr-i':''}/>{errs.suburb&&<span className="ferr">{errs.suburb}</span>}</div>
+              <div className="fgrp"><label>State <span className="req">*</span></label><select value={form.state} onChange={e=>upd('state',e.target.value)} className={errs.state?'ferr-i':''}><option value="">Select</option>{['NSW','VIC','QLD','WA','SA','TAS','ACT','NT'].map(s=><option key={s}>{s}</option>)}</select>{errs.state&&<span className="ferr">{errs.state}</span>}</div>
+              <div className="fgrp"><label>Postcode <span className="req">*</span></label><input value={form.postcode} onChange={e=>upd('postcode',e.target.value)} className={errs.postcode?'ferr-i':''} maxLength={4} placeholder="e.g. 6000"/>{errs.postcode&&<span className="ferr">{errs.postcode}</span>}</div>
+            </div>
+
+            <div style={{fontSize:13,fontWeight:700,color:'var(--ink)',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:14,paddingTop:16,borderTop:'1px solid var(--gray-light)'}}>Work Preferences</div>
+            <div className="fg">
+              <div className="fgrp">
+                <label>Preferred City to Work <span className="req">*</span></label>
+                <select value={form.preferredCity} onChange={e=>upd('preferredCity',e.target.value)} className={errs.preferredCity?'ferr-i':''}>
+                  <option value="">Select city</option>
+                  {['Sydney','Melbourne','Brisbane','Perth','Adelaide','Canberra','Gold Coast','Newcastle','Wollongong','Geelong'].map(c=><option key={c}>{c}</option>)}
+                </select>
+                {errs.preferredCity&&<span className="ferr">{errs.preferredCity}</span>}
+              </div>
+              <div className="fgrp">
+                <label>Preferred Work Type <span className="req">*</span></label>
+                <select value={form.workType} onChange={e=>upd('workType',e.target.value)} className={errs.workType?'ferr-i':''}>
+                  <option value="">Select type</option>
+                  {['Casual','Part-time','Full-time','Any'].map(t=><option key={t}>{t}</option>)}
+                </select>
+                {errs.workType&&<span className="ferr">{errs.workType}</span>}
+              </div>
+            </div>
+
+            {submitErr&&<div style={{background:'var(--error-bg)',border:'1px solid #F5C6CB',borderRadius:'var(--radius-sm)',padding:14,marginTop:16,color:'var(--error)',fontSize:13}}>{submitErr}</div>}
+          </div>
+          <div className="form-nav">
+            <span/>
+            <button className="btn-sub" onClick={submit} disabled={submitting} style={{opacity:submitting?0.7:1}}>
+              {submitting?'Submitting…':'Submit Application →'}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </>);
+}
+
+/* ── POLICE CHECK ── */
+function Police({ setPage, policeTab, setPoliceTab }) {
+  const tab = policeTab || 'apply';
+  const setTab = setPoliceTab || (() => {});
+  return (<>
+    <div className="pc-hero">
+      <div className="pc-hi">
+        <div>
+          <div className="lbl lbl-lt">ACIC Accredited</div>
+          <h2>National Police Check Portal</h2>
+          <p>Apply online for your National Police Check. Required for all Placewright Talent placements. Fast, secure, and compliant with Australian privacy law.</p>
+          <div className="pc-pills">
+            {['Results in 1–2 days','Privacy Act Compliant','100% Online','ACIC Accredited'].map(p=><span className="pc-pill" key={p}>{p}</span>)}
+          </div>
+        </div>
+        <div className="pc-card">
+          <h3>Ready to apply?</h3>
+          <p>Takes under 10 minutes. Have your ID documents ready before you start.</p>
+          <div className="pc-steps">
+            {['Fill in your personal details','Upload two forms of ID','Review and give consent','Receive certificate via email'].map((s,i)=>(
+              <div className="pc-step" key={s}><div className="pc-sn">{i+1}</div>{s}</div>
+            ))}
+          </div>
+          <button className="btn-p" style={{width:'100%',justifyContent:'center'}} onClick={()=>setTab('apply')}>Start Application →</button>
+        </div>
+      </div>
+    </div>
+
+    <div className="tabs">
+      {[['apply','Apply'],['track','Track Application'],['admin','Admin Dashboard']].map(([id,lbl])=>(
+        <button key={id} className={`tab-btn${tab===id?' active':''}`} onClick={()=>setTab(id)}>{lbl}</button>
+      ))}
+    </div>
+
+    <div className="sec">
+      <div className="inner" style={{maxWidth:820}}>
+        {tab==='apply' && <AppForm setPage={setPage}/>}
+        {tab==='track' && <Tracker/>}
+        {tab==='admin' && <AdminDash/>}
+      </div>
+    </div>
+  </>);
+}
+
+/* ── SUPABASE CONFIG ──
+ * The anon (publishable) key below is DESIGNED to be public — but it is only
+ * safe because Row Level Security is locked down. Run supabase-security.sql
+ * in the Supabase SQL Editor BEFORE deploying this file. With those policies:
+ *   - anon may only INSERT into applications / job_applications and only
+ *     UPLOAD to the id-documents bucket (never read, list, or modify)
+ *   - reads and status updates require a signed-in Supabase Auth staff user
+ *   - the public tracker uses the track_application() RPC, which returns
+ *     only reference, name, status, site, and submission date
+ */
+const SUPA_URL = 'https://hcwbseetqgowwvdvdpkz.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhjd2JzZWV0cWdvd3d2ZHZkcGt6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ2OTgwMjIsImV4cCI6MjA5MDI3NDAyMn0.k3ROFEBN85f8tYLQ3JLiZKYHnDwfe6QUC2-yz_EQTQ8';
+
+const sbError = async (r) => {
+  const e = new Error(await r.text().catch(()=>String(r.status)));
+  e.status = r.status;
+  return e;
+};
+
+const sb = {
+  // Anonymous insert. return=minimal is required: anon has no SELECT
+  // privilege, so asking PostgREST to return the inserted row would fail.
+  async insert(table, data) {
+    const r = await fetch(`${SUPA_URL}/rest/v1/${table}`, {
+      method:'POST', headers:{'Content-Type':'application/json','apikey':SUPA_KEY,'Authorization':`Bearer ${SUPA_KEY}`,'Prefer':'return=minimal'},
+      body: JSON.stringify(data)
+    });
+    if(!r.ok) throw await sbError(r);
+  },
+  // Staff-only read: pass the Supabase Auth access token. Returns a single
+  // page as-is — PostgREST caps this at its configured max rows (1000 by
+  // default on Supabase) regardless of how many rows match. Use selectAll()
+  // below when you actually need every matching row.
+  async select(table, query='', token) {
+    const r = await fetch(`${SUPA_URL}/rest/v1/${table}?${query}&order=created_at.desc`, {
+      headers:{'apikey':SUPA_KEY,'Authorization':`Bearer ${token||SUPA_KEY}`}
+    });
+    if(!r.ok) throw await sbError(r);
+    return r.json();
+  },
+  // Staff-only read of EVERY matching row, paged past PostgREST's default
+  // 1000-row-per-request cap using Range headers. Uses the Content-Range
+  // response header (via Prefer: count=exact) to know the true total, so
+  // it keeps paging correctly even if Supabase's own server-side max-rows
+  // setting is different from pageSize — falls back to a page-length check
+  // only if that header is ever missing. Capped at 500 pages as a sanity
+  // guard against an infinite loop, not a real business limit.
+  async selectAll(table, query='', token, pageSize=1000) {
+    let out = [];
+    let from = 0;
+    let total = null;
+    for(let page=0; page<500; page++) {
+      const to = from + pageSize - 1;
+      const r = await fetch(`${SUPA_URL}/rest/v1/${table}?${query}&order=created_at.desc`, {
+        headers:{
+          'apikey':SUPA_KEY,
+          'Authorization':`Bearer ${token||SUPA_KEY}`,
+          'Range-Unit':'items',
+          'Range':`${from}-${to}`,
+          'Prefer':'count=exact',
+        }
+      });
+      if(!r.ok) throw await sbError(r);
+      const rows = await r.json();
+      out = out.concat(rows);
+
+      const cr = r.headers.get('content-range'); // e.g. "0-999/2453" or "*/0"
+      const m = cr && cr.match(/\/(\d+)$/);
+      if(m) total = parseInt(m[1], 10);
+
+      from += rows.length;
+      if(rows.length === 0) break;                        // nothing left
+      if(total !== null && from >= total) break;           // reached the real total
+      if(total === null && rows.length < pageSize) break;  // no count header — best-effort fallback
+    }
+    return out;
+  },
+  // Staff-only update: pass the Supabase Auth access token.
+  async update(table, match, data, token) {
+    const r = await fetch(`${SUPA_URL}/rest/v1/${table}?${match}`, {
+      method:'PATCH', headers:{'Content-Type':'application/json','apikey':SUPA_KEY,'Authorization':`Bearer ${token||SUPA_KEY}`,'Prefer':'return=minimal'},
+      body: JSON.stringify(data)
+    });
+    if(!r.ok) throw await sbError(r);
+  },
+  // Public RPC (SECURITY DEFINER function exposing only safe columns).
+  async rpc(fn, args) {
+    const r = await fetch(`${SUPA_URL}/rest/v1/rpc/${fn}`, {
+      method:'POST', headers:{'Content-Type':'application/json','apikey':SUPA_KEY,'Authorization':`Bearer ${SUPA_KEY}`},
+      body: JSON.stringify(args)
+    });
+    if(!r.ok) throw await sbError(r);
+    return r.json();
+  },
+  // Supabase Auth email/password sign-in (staff accounts managed in the
+  // Supabase Dashboard → Authentication). Returns { access_token, ... }.
+  async signIn(email, password) {
+    const r = await fetch(`${SUPA_URL}/auth/v1/token?grant_type=password`, {
+      method:'POST', headers:{'Content-Type':'application/json','apikey':SUPA_KEY},
+      body: JSON.stringify({email, password})
+    });
+    if(!r.ok) throw await sbError(r);
+    return r.json();
+  },
+  // Anonymous upload to the private id-documents bucket (insert-only policy).
+  async uploadFile(bucket, path, file) {
+    const r = await fetch(`${SUPA_URL}/storage/v1/object/${bucket}/${path}`, {
+      method:'POST', headers:{'apikey':SUPA_KEY,'Authorization':`Bearer ${SUPA_KEY}`,'Content-Type':file.type},
+      body: file
+    });
+    if(!r.ok) throw await sbError(r);
+  },
+  // Staff-only: create a short-lived signed URL for a private object.
+  async signUrl(bucket, path, token, expiresIn=600) {
+    const r = await fetch(`${SUPA_URL}/storage/v1/object/sign/${bucket}/${path}`, {
+      method:'POST', headers:{'Content-Type':'application/json','apikey':SUPA_KEY,'Authorization':`Bearer ${token}`},
+      body: JSON.stringify({expiresIn})
+    });
+    if(!r.ok) throw await sbError(r);
+    const j = await r.json();
+    return `${SUPA_URL}/storage/v1${j.signedURL}`;
+  }
+};
+
+/* ── APPLICATION FORM ── */
+function AppForm({ setPage }) {
+  const [step,setStep]=useState(0);
+  const [done,setDone]=useState(false);
+  const [submittedRef,setSubmittedRef]=useState('');
+  const [submitting,setSubmitting]=useState(false);
+  const [submitErr,setSubmitErr]=useState('');
+  const [files,setFiles]=useState({selfie:null,licenceFront:null,licenceBack:null,secondaryFront:null,secondaryBack:null});
+  const [drag,setDrag]=useState({selfie:false,licenceFront:false,licenceBack:false,secondaryFront:false,secondaryBack:false});
+  const [form,setForm]=useState({firstName:'',middleName:'',lastName:'',dob:'',email:'',phone:'',gender:'',address:'',suburb:'',state:'',postcode:'',prevAddress:'',c1:false,c2:false,c3:false});
+  const [errs,setErrs]=useState({});
+  const upd=(k,v)=>setForm(f=>({...f,[k]:v}));
+
+  const validate=()=>{
+    const e={};
+    if(step===0){if(!form.firstName.trim())e.firstName='Required';if(!form.lastName.trim())e.lastName='Required';if(!form.dob)e.dob='Required';if(!form.email.includes('@'))e.email='Valid email required';if(!form.phone.trim())e.phone='Required';}
+    if(step===1){if(!form.address.trim())e.address='Required';if(!form.suburb.trim())e.suburb='Required';if(!form.state)e.state='Required';if(!form.postcode.trim())e.postcode='Required';}
+    if(step===2){if(!files.selfie)e.selfie='Required';if(!files.licenceFront)e.licenceFront='Required';if(!files.licenceBack)e.licenceBack='Required';if(!files.secondaryFront)e.secondaryFront='Required';}
+    if(step===3){if(!form.c1||!form.c2||!form.c3)e.consent='All declarations required';}
+    setErrs(e);return Object.keys(e).length===0;
+  };
+  const next=()=>{if(validate())setStep(s=>s+1);};
+  const back=()=>setStep(s=>s-1);
+  const handleFile=(key,file)=>{if(file)setFiles(f=>({...f,[key]:file}));};
+
+  const submit = async () => {
+    if(!validate()) return;
+    setSubmitting(true);
+    setSubmitErr('');
+    try {
+      const reference = genRef();
+      // Upload ID documents to Supabase Storage (private bucket; the
+      // random reference makes the folder path unguessable)
+      const uploadFile = async (file, label) => {
+        const ext = file.name.split('.').pop();
+        const path = `${reference}/${label}.${ext}`;
+        await sb.uploadFile('id-documents', path, file);
+        return path;
+      };
+      const selfiePath = await uploadFile(files.selfie, 'selfie-with-licence');
+      const licenceFrontPath = await uploadFile(files.licenceFront, 'licence-front');
+      const licenceBackPath = await uploadFile(files.licenceBack, 'licence-back');
+      const secondaryFrontPath = await uploadFile(files.secondaryFront, 'secondary-front');
+      const secondaryBackPath = files.secondaryBack ? await uploadFile(files.secondaryBack, 'secondary-back') : null;
+
+      await sb.insert('applications', {
+        first_name: form.firstName,
+        middle_name: form.middleName,
+        last_name: form.lastName,
+        dob: form.dob,
+        email: form.email,
+        phone: form.phone,
+        gender: form.gender,
+        address: form.address,
+        suburb: form.suburb,
+        state: form.state,
+        postcode: form.postcode,
+        prev_address: form.prevAddress,
+        site: form.site,
+        start_date: form.startDate,
+        reference,
+        status: 'pending',
+        primary_id_path: licenceFrontPath,
+        secondary_id_path: secondaryFrontPath,
+        selfie_path: selfiePath,
+        licence_back_path: licenceBackPath,
+        secondary_back_path: secondaryBackPath,
+      });
+
+      setSubmittedRef(reference);
+
+      // Send email notification
+      try {
+        await emailjs.send('personnelstaffingaus', 'template_s7758nl', {
+          name: `${form.firstName} ${form.middleName} ${form.lastName}`.trim(),
+          email: form.email,
+          phone: form.phone,
+          reference: reference,
+          site: form.site || 'Not specified',
+        });
+      } catch(emailErr) { console.warn('Email notification failed:', emailErr); }
+
+      setDone(true);
+    } catch(err) {
+      console.error(err);
+      setSubmitErr('Something went wrong submitting your application. Please try again or contact us on 0470 632 701.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const stepLabels=['Personal Details','Address & Work','Upload ID','Consent & Submit'];
+
+  if(done) return (
+    <div className="success-sc">
+      <div className="s-icon">✓</div>
+      <h2>Application Submitted!</h2>
+      <p>Your police check application has been received and is now being processed.</p>
+      <p style={{marginTop:4}}>Once complete, contact us to confirm at <strong>seth@swcstaffingsolutions.com.au</strong>.</p>
+      <div className="ref-b"><span>Your Reference Number</span><strong>{submittedRef}</strong></div>
+      <p style={{fontSize:13,color:'var(--gray-mid)',marginBottom:24}}>Save this number to track your application. Results within 1–2 business days.</p>
+      <div style={{display:'flex',gap:12,justifyContent:'center',flexWrap:'wrap'}}>
+        <button className="btn-n" onClick={()=>{setDone(false);setStep(0);setFiles({selfie:null,licenceFront:null,licenceBack:null,secondaryFront:null,secondaryBack:null});setForm({firstName:'',middleName:'',lastName:'',dob:'',email:'',phone:'',gender:'',address:'',suburb:'',state:'',postcode:'',prevAddress:'',c1:false,c2:false,c3:false});}}>New Application</button>
+        <button className="btn-bk" onClick={()=>setPage('home')}>Return Home</button>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="form-wrap">
+      <div className="form-hdr">
+        <div><h3>Step {step+1} of {stepLabels.length}: {stepLabels[step]}</h3><p>Secured and encrypted. Compliant with the Australian Privacy Act 1988.</p></div>
+        <div className="prog">{stepLabels.map((_,i)=><div key={i} className={`prog-pip${i<step?' done':i===step?' active':''}`}/>)}</div>
+      </div>
+      <div className="form-body">
+        {step===0 && <>
+          <div className="info-b">ℹ️ Enter details exactly as they appear on your government-issued ID.</div>
+          <div className="fg">
+            {[['firstName','First Name'],['middleName','Middle Name (if applicable)'],['lastName','Last Name']].map(([k,l])=>(
+              <div className="fgrp" key={k}><label>{l} {k!=='middleName'&&<span className="req">*</span>}</label><input value={form[k]} onChange={e=>upd(k,e.target.value)} className={errs[k]?'ferr-i':''}/>{errs[k]&&<span className="ferr">{errs[k]}</span>}</div>
+            ))}
+            <div className="fgrp"><label>Date of Birth <span className="req">*</span></label><input type="date" value={form.dob} onChange={e=>upd('dob',e.target.value)} className={errs.dob?'ferr-i':''}/>{errs.dob&&<span className="ferr">{errs.dob}</span>}</div>
+            <div className="fgrp"><label>Gender</label><select value={form.gender} onChange={e=>upd('gender',e.target.value)}><option value="">Prefer not to say</option>{['Male','Female','Non-binary','Other'].map(g=><option key={g}>{g}</option>)}</select></div>
+            <div className="fgrp"><label>Email <span className="req">*</span></label><input type="email" value={form.email} onChange={e=>upd('email',e.target.value)} className={errs.email?'ferr-i':''} placeholder="your@email.com"/>{errs.email&&<span className="ferr">{errs.email}</span>}</div>
+            <div className="fgrp"><label>Mobile <span className="req">*</span></label><input type="tel" value={form.phone} onChange={e=>upd('phone',e.target.value)} className={errs.phone?'ferr-i':''} placeholder="04XX XXX XXX"/>{errs.phone&&<span className="ferr">{errs.phone}</span>}</div>
+          </div>
+        </>}
+        {step===1 && <>
+          <div className="info-b">ℹ️ Provide your current address. Include any previous address if you've moved in the last 5 years.</div>
+          <div className="fg">
+            <div className="fgrp fg-full"><label>Street Address <span className="req">*</span></label><input value={form.address} onChange={e=>upd('address',e.target.value)} className={errs.address?'ferr-i':''} placeholder="Street number and name"/>{errs.address&&<span className="ferr">{errs.address}</span>}</div>
+            <div className="fgrp"><label>Suburb <span className="req">*</span></label><input value={form.suburb} onChange={e=>upd('suburb',e.target.value)} className={errs.suburb?'ferr-i':''}/>{errs.suburb&&<span className="ferr">{errs.suburb}</span>}</div>
+            <div className="fgrp"><label>State <span className="req">*</span></label><select value={form.state} onChange={e=>upd('state',e.target.value)} className={errs.state?'ferr-i':''}><option value="">Select</option>{['NSW','VIC','QLD','WA','SA','TAS','ACT','NT'].map(s=><option key={s}>{s}</option>)}</select>{errs.state&&<span className="ferr">{errs.state}</span>}</div>
+            <div className="fgrp"><label>Postcode <span className="req">*</span></label><input value={form.postcode} onChange={e=>upd('postcode',e.target.value)} className={errs.postcode?'ferr-i':''} maxLength={4} placeholder="e.g. 6000"/>{errs.postcode&&<span className="ferr">{errs.postcode}</span>}</div>
+            <div className="fgrp fg-full"><label>Previous Address (if moved in last 5 years)</label><input value={form.prevAddress} onChange={e=>upd('prevAddress',e.target.value)} placeholder="Street, suburb, state, postcode"/></div>
+          
+          </div>
+        </>}
+        {step===2 && <>
+          <div className="info-b">ℹ️ Upload all required photos. Files must be clear and legible. PDF, JPG, or PNG — max 10MB each.</div>
+          <div style={{marginBottom:10,paddingBottom:16,borderBottom:'1px solid var(--gray-light)'}}>
+            <div style={{fontSize:13,fontWeight:700,color:'var(--ink)',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:14}}>Primary ID — Driver's Licence</div>
+            {[
+              {key:'selfie',label:'Selfie holding your Driver\'s Licence',hint:'Hold your licence next to your face — both must be clearly visible'},
+              {key:'licenceFront',label:'Front of Driver\'s Licence',hint:'Ensure name, DOB, and licence number are clearly readable'},
+              {key:'licenceBack',label:'Back of Driver\'s Licence',hint:'Ensure the back of the card is flat and in focus'},
+            ].map(({key,label,hint})=>(
+              <div className="fgrp" key={key} style={{marginBottom:14}}>
+                <label style={{marginBottom:5}}>{label} <span className="req">*</span><div style={{fontWeight:400,color:'var(--gray-mid)',fontSize:12,marginTop:2}}>{hint}</div></label>
+                {files[key]
+                  ? <div className="up-file"><span>✓ {files[key].name} ({(files[key].size/1024/1024).toFixed(1)}MB)</span><button className="up-rem" onClick={()=>setFiles(f=>({...f,[key]:null}))}>×</button></div>
+                  : <div className={`upload-z${drag[key]?' drag':''}`} onDragOver={e=>{e.preventDefault();setDrag(d=>({...d,[key]:true}));}} onDragLeave={()=>setDrag(d=>({...d,[key]:false}))} onDrop={e=>{e.preventDefault();handleFile(key,e.dataTransfer.files[0]);setDrag(d=>({...d,[key]:false}));}} onClick={()=>document.getElementById(`f-${key}`).click()}>
+                    <div style={{fontSize:26}}>📎</div><h4>Drop file or click to browse</h4><p>PDF, JPG, PNG — max 10MB</p>
+                    <input type="file" id={`f-${key}`} accept=".pdf,.jpg,.jpeg,.png" onChange={e=>handleFile(key,e.target.files[0])}/>
+                  </div>
+                }
+                {errs[key]&&<span className="ferr">{errs[key]}</span>}
+              </div>
+            ))}
+          </div>
+          <div>
+            <div style={{fontSize:13,fontWeight:700,color:'var(--ink)',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:14}}>Secondary ID — Medicare Card or Passport</div>
+            {[
+              {key:'secondaryFront',label:'Front of Medicare Card or Passport photo page',hint:'Medicare: full card visible. Passport: photo/details page open flat'},
+              {key:'secondaryBack',label:'Back of Medicare Card (if applicable)',hint:'Passport holders can skip this — Medicare cardholders please include'},
+            ].map(({key,label,hint})=>(
+              <div className="fgrp" key={key} style={{marginBottom:14}}>
+                <label style={{marginBottom:5}}>{label} {key==='secondaryFront'&&<span className="req">*</span>}<div style={{fontWeight:400,color:'var(--gray-mid)',fontSize:12,marginTop:2}}>{hint}</div></label>
+                {files[key]
+                  ? <div className="up-file"><span>✓ {files[key].name} ({(files[key].size/1024/1024).toFixed(1)}MB)</span><button className="up-rem" onClick={()=>setFiles(f=>({...f,[key]:null}))}>×</button></div>
+                  : <div className={`upload-z${drag[key]?' drag':''}`} onDragOver={e=>{e.preventDefault();setDrag(d=>({...d,[key]:true}));}} onDragLeave={()=>setDrag(d=>({...d,[key]:false}))} onDrop={e=>{e.preventDefault();handleFile(key,e.dataTransfer.files[0]);setDrag(d=>({...d,[key]:false}));}} onClick={()=>document.getElementById(`f-${key}`).click()}>
+                    <div style={{fontSize:26}}>📎</div><h4>Drop file or click to browse</h4><p>PDF, JPG, PNG — max 10MB</p>
+                    <input type="file" id={`f-${key}`} accept=".pdf,.jpg,.jpeg,.png" onChange={e=>handleFile(key,e.target.files[0])}/>
+                  </div>
+                }
+                {errs[key]&&<span className="ferr">{errs[key]}</span>}
+              </div>
+            ))}
+          </div>
+        </>}
+        {step===3 && <>
+          <div className="info-b">ℹ️ Please review your details and agree to all declarations before submitting.</div>
+          <div style={{background:'var(--off-white)',border:'1px solid var(--gray-light)',borderRadius:'var(--radius)',padding:18,marginBottom:18}}>
+            <h4 style={{fontWeight:700,marginBottom:10,fontSize:14}}>Application Summary</h4>
+            <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'7px 22px',fontSize:14}}>
+              <span style={{color:'var(--gray-mid)'}}>Name</span><strong>{form.firstName} {form.middleName} {form.lastName}</strong>
+              <span style={{color:'var(--gray-mid)'}}>DOB</span><strong>{form.dob}</strong>
+              <span style={{color:'var(--gray-mid)'}}>Email</span><strong>{form.email}</strong>
+              <span style={{color:'var(--gray-mid)'}}>Site</span><strong>{form.site||'Not specified'}</strong>
+              <span style={{color:'var(--gray-mid)'}}>Selfie w/ Licence</span><strong>{files.selfie?.name||'—'}</strong>
+              <span style={{color:'var(--gray-mid)'}}>Licence Front</span><strong>{files.licenceFront?.name||'—'}</strong>
+              <span style={{color:'var(--gray-mid)'}}>Licence Back</span><strong>{files.licenceBack?.name||'—'}</strong>
+              <span style={{color:'var(--gray-mid)'}}>Secondary ID</span><strong>{files.secondaryFront?.name||'—'}</strong>
+            </div>
+          </div>
+          <div className="consent-b">
+            <h4>Consent &amp; Declaration</h4>
+            <p>By submitting, you consent to Placewright Talent conducting a National Police Check in accordance with ACIC requirements and the Privacy Act 1988 (Cth).</p>
+            {[['c1','I confirm all information provided is true and correct to the best of my knowledge.'],['c2','I consent to Placewright Talent collecting, using, and disclosing my personal information for the purpose of conducting a National Police Check as outlined in the Privacy Policy.'],['c3','I understand results may be shared with my prospective employer as authorised under the Privacy Act 1988.']].map(([k,t])=>(
+              <div className="chk-row" key={k}><input type="checkbox" id={k} checked={form[k]} onChange={e=>upd(k,e.target.checked)}/><label htmlFor={k}>{t}</label></div>
+            ))}
+            {errs.consent&&<span className="ferr" style={{display:'block',marginTop:8}}>{errs.consent}</span>}
+          </div>
+          {submitErr&&<div style={{background:'var(--error-bg)',border:'1px solid #F5C6CB',borderRadius:'var(--radius-sm)',padding:14,marginTop:16,color:'var(--error)',fontSize:13}}>{submitErr}</div>}
+        </>}
+      </div>
+      <div className="form-nav">
+        {step>0?<button className="btn-bk" onClick={back} disabled={submitting}>← Back</button>:<span/>}
+        {step<3
+          ?<button className="btn-n" onClick={next}>Continue →</button>
+          :<button className="btn-sub" onClick={submit} disabled={submitting} style={{opacity:submitting?0.7:1}}>
+            {submitting?'Uploading & Submitting…':'Submit Application ✓'}
+          </button>
+        }
+      </div>
+    </div>
+  );
+}
+
+/* ── TRACKER ──
+ * Uses the track_application() RPC instead of a table SELECT. The anon key
+ * can no longer read the applications table; the RPC returns only safe
+ * fields (reference, name, status, site, created_at).
+ */
+function Tracker() {
+  const [q,setQ]=useState('');
+  const [res,setRes]=useState(null);
+  const [nf,setNf]=useState(false);
+  const [loading,setLoading]=useState(false);
+
+  const search = async () => {
+    if(!q.trim()) return;
+    setLoading(true); setNf(false); setRes(null);
+    try {
+      const data = await sb.rpc('track_application', { ref: q.trim().toUpperCase() });
+      if(data && data.length>0) { setRes(data[0]); setNf(false); }
+      else setNf(true);
+    } catch(e) { setNf(true); }
+    finally { setLoading(false); }
+  };
+
+  const tl=(status)=>[
+    {l:'Application Received',d:'Your application and ID documents have been received.',s:'done'},
+    {l:'Identity Verified',d:'Your ID documents are being checked.',s:status==='pending'?'pend':'done'},
+    {l:'Check in Progress',d:'Your check is being processed with the ACIC database.',s:status==='complete'?'done':status==='processing'?'active':'pend'},
+    {l:'Results Ready',d:'Your National Police Certificate has been issued.',s:status==='complete'?'done':'pend'},
+  ];
+
+  const fmtDate = d => d ? new Date(d).toLocaleDateString('en-AU') : '—';
+
+  return (
+    <div style={{maxWidth:620}}>
+      <h3 style={{fontSize:20,fontWeight:700,color:'var(--ink)',marginBottom:8}}>Track Your Application</h3>
+      <p style={{color:'var(--gray-dark)',fontSize:14,marginBottom:22}}>Enter your reference number to check your live application status.</p>
+      <div className="status-search">
+        <div className="fgrp" style={{flex:1}}><label>Reference Number</label><input value={q} onChange={e=>setQ(e.target.value)} placeholder="e.g. PWT-2026-K7PMQ2XA" onKeyDown={e=>e.key==='Enter'&&search()}/></div>
+        <button className="btn-n" onClick={search} disabled={loading}>{loading?'Searching…':'Search'}</button>
+      </div>
+      {nf&&<div style={{background:'var(--error-bg)',border:'1px solid #F5C6CB',borderRadius:'var(--radius)',padding:18,marginTop:18,color:'var(--error)',fontSize:14}}>No application found with that reference number. Please check and try again.</div>}
+      {res&&(
+        <div className="status-res">
+          <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:22}}>
+            <div>
+              <h3 style={{fontSize:18,fontWeight:700,color:'var(--ink)'}}>{res.first_name} {res.last_name}</h3>
+              <p style={{fontSize:13,color:'var(--gray-mid)',marginTop:3}}>Ref: {res.reference} · Submitted {fmtDate(res.created_at)} · {res.site||'No site'}</p>
+            </div>
+            <span className={`sbadge ${res.status}`}>{res.status==='complete'?'Complete':res.status==='processing'?'In Progress':'Pending'}</span>
+          </div>
+          {tl(res.status).map((t,i)=>(
+            <div className="tl-item" key={i}>
+              <div className={`tl-dot ${t.s}`}/>
+              <div className="tl-txt"><h4 style={{color:t.s==='pend'?'var(--gray-mid)':'var(--ink)'}}>{t.l}</h4><p>{t.d}</p></div>
+            </div>
+          ))}
+          {res.status==='complete'&&<div style={{background:'var(--success-bg)',border:'1px solid #B2DFCC',borderRadius:'var(--radius)',padding:14,marginTop:10}}><strong style={{color:'var(--success)',fontSize:13}}>✓ Your National Police Certificate has been issued. Contact Seth on 0470 632 701 to receive your copy.</strong></div>}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ── ADMIN ──
+ * Real authentication via Supabase Auth. No password lives in this file.
+ * Staff accounts are created in Supabase Dashboard → Authentication → Users.
+ * The session access token (kept in memory only, never persisted) is what
+ * unlocks SELECT / UPDATE via RLS and signed URLs for ID documents.
+ */
+function AdminDash() {
+  const [token,setToken]=useState(null);
+  const [staffEmail,setStaffEmail]=useState('');
+  const [email,setEmail]=useState('');
+  const [pw,setPw]=useState('');
+  const [authErr,setAuthErr]=useState('');
+  const [authing,setAuthing]=useState(false);
+  const [sq,setSq]=useState('');
+  const [sf,setSf]=useState('all');
+  const [genderSort,setGenderSort]=useState(null); // null | 'asc' | 'desc'
+  const [apps,setApps]=useState([]);
+  const [loading,setLoading]=useState(false);
+  const [selected,setSelected]=useState(null);
+  const [docUrls,setDocUrls]=useState({});
+  const [docsLoading,setDocsLoading]=useState(false);
+  const [updating,setUpdating]=useState(false);
+
+  const sessionExpired = () => {
+    setToken(null); setApps([]); setSelected(null);
+    setAuthErr('Your session has expired. Please log in again.');
+  };
+
+  const login = async () => {
+    if(!email.trim() || !pw) { setAuthErr('Enter your email and password.'); return; }
+    setAuthing(true); setAuthErr('');
+    try {
+      const session = await sb.signIn(email.trim(), pw);
+      setToken(session.access_token);
+      setStaffEmail(email.trim());
+      setPw('');
+      await loadApps(session.access_token);
+    } catch(e) {
+      setAuthErr('Login failed. Check your email and password.');
+    } finally {
+      setAuthing(false);
+    }
+  };
+
+  const logout = () => {
+    setToken(null); setStaffEmail(''); setApps([]); setSelected(null); setAuthErr('');
+  };
+
+  const loadApps = async (t) => {
+    setLoading(true);
+    try {
+      const data = await sb.selectAll('applications','select=*', t||token);
+      setApps(data||[]);
+    } catch(e) {
+      console.error(e);
+      if(e.status===401) sessionExpired();
+    } finally { setLoading(false); }
+  };
+
+  const updateStatus = async (id, status) => {
+    setUpdating(true);
+    try {
+      await sb.update('applications', `id=eq.${id}`, {status}, token);
+      setApps(prev=>prev.map(a=>a.id===id?{...a,status}:a));
+      setSelected(s=>s && s.id===id ? {...s,status} : s);
+    } catch(e) {
+      if(e.status===401) sessionExpired();
+      else alert('Failed to update status.');
+    } finally { setUpdating(false); }
+  };
+
+  // Open an application and fetch short-lived signed URLs for its documents.
+  const openDetails = async (a) => {
+    setSelected(a); setDocUrls({}); setDocsLoading(true);
+    const docs = [
+      ['Selfie w/ Licence', a.selfie_path],
+      ['Licence Front', a.primary_id_path],
+      ['Licence Back', a.licence_back_path],
+      ['Secondary ID Front', a.secondary_id_path],
+      ['Secondary ID Back', a.secondary_back_path],
+    ];
+    const urls = {};
+    for(const [label, path] of docs) {
+      if(path) {
+        try { urls[label] = await sb.signUrl('id-documents', path, token); }
+        catch(e) { console.error('Signed URL failed for', label, e); if(e.status===401){ sessionExpired(); setDocsLoading(false); return; } }
+      }
+    }
+    setDocUrls(urls);
+    setDocsLoading(false);
+  };
+
+  const fmtDate = d => d ? new Date(d).toLocaleDateString('en-AU') : '—';
+
+  if(!token) return (
+    <div style={{maxWidth:360}}>
+      <h3 style={{fontSize:19,fontWeight:700,color:'var(--ink)',marginBottom:6}}>Admin Login</h3>
+      <p style={{fontSize:14,color:'var(--gray-dark)',marginBottom:22}}>Staff access only. Sign in with your Placewright Talent staff account.</p>
+      <div className="fgrp" style={{marginBottom:14}}>
+        <label>Email</label>
+        <input type="email" value={email} onChange={e=>{setEmail(e.target.value);setAuthErr('');}} placeholder="you@swcstaffingsolutions.com.au" autoComplete="username"/>
+      </div>
+      <div className="fgrp" style={{marginBottom:14}}>
+        <label>Password</label>
+        <input type="password" value={pw} onChange={e=>{setPw(e.target.value);setAuthErr('');}} placeholder="Password" autoComplete="current-password"
+          onKeyDown={e=>e.key==='Enter'&&!authing&&login()}/>
+        {authErr&&<span className="ferr">{authErr}</span>}
+      </div>
+      <button className="btn-n" style={{width:'100%',opacity:authing?0.7:1}} onClick={login} disabled={authing}>{authing?'Signing in…':'Login →'}</button>
+      <p style={{fontSize:12,color:'var(--gray-mid)',marginTop:14,lineHeight:1.6}}>Forgotten your password or need an account? Contact your administrator — staff accounts are managed centrally.</p>
+    </div>
+  );
+
+  let filtered=apps.filter(a=>{
+    const mq=(a.first_name+' '+a.last_name).toLowerCase().includes(sq.toLowerCase())||a.reference?.toLowerCase().includes(sq.toLowerCase());
+    const mf=sf==='all'||a.status===sf;
+    return mq&&mf;
+  });
+  if(genderSort){
+    filtered=[...filtered].sort((a,b)=>{
+      const ga=(a.gender||'').toLowerCase(), gb=(b.gender||'').toLowerCase();
+      if(!ga&&!gb) return 0;
+      if(!ga) return 1;   // blanks/"prefer not to say" sink to the bottom
+      if(!gb) return -1;
+      if(ga<gb) return genderSort==='asc'?-1:1;
+      if(ga>gb) return genderSort==='asc'?1:-1;
+      return 0;
+    });
+  }
+  const cnt={total:apps.length,complete:apps.filter(a=>a.status==='complete').length,processing:apps.filter(a=>a.status==='processing').length,pending:apps.filter(a=>a.status==='pending').length};
+
+  return (
+    <div style={{background:'var(--white)',border:'1px solid var(--gray-light)',borderRadius:6,overflow:'hidden'}}>
+      {selected && (
+        <div style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.5)',zIndex:200,display:'flex',alignItems:'center',justifyContent:'center',padding:20}}>
+          <div style={{background:'var(--white)',borderRadius:6,padding:32,maxWidth:560,width:'100%',maxHeight:'80vh',overflowY:'auto',position:'relative'}}>
+            <button onClick={()=>setSelected(null)} style={{position:'absolute',top:16,right:16,background:'none',border:'none',fontSize:22,cursor:'pointer',color:'var(--gray-mid)'}}>×</button>
+            <h3 style={{fontSize:19,fontWeight:700,color:'var(--ink)',marginBottom:4}}>{selected.first_name} {selected.last_name}</h3>
+            <p style={{fontSize:13,color:'var(--gray-mid)',marginBottom:20}}>Ref: {selected.reference} · Submitted {fmtDate(selected.created_at)}</p>
+            <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'8px 20px',fontSize:14,marginBottom:20}}>
+              {[['DOB',selected.dob],['Email',selected.email],['Phone',selected.phone],['Gender',selected.gender||'Not specified'],['Address',`${selected.address}, ${selected.suburb} ${selected.state} ${selected.postcode}`],['Site',selected.site||'Not specified'],['Start Date',selected.start_date||'Not specified']].map(([l,v])=>(
+                <React.Fragment key={l}><span style={{color:'var(--gray-mid)',fontWeight:600}}>{l}</span><span>{v}</span></React.Fragment>
+              ))}
+            </div>
+            <div style={{borderTop:'1px solid var(--gray-light)',paddingTop:16,marginBottom:16}}>
+              <h4 style={{fontSize:13,fontWeight:700,color:'var(--ink)',marginBottom:12,textTransform:'uppercase',letterSpacing:'0.05em'}}>ID Documents</h4>
+              {docsLoading && <div style={{fontSize:13,color:'var(--gray-mid)',marginBottom:8}}>Generating secure links…</div>}
+              {!docsLoading && [['Selfie w/ Licence',selected.selfie_path],['Licence Front',selected.primary_id_path],['Licence Back',selected.licence_back_path],['Secondary ID Front',selected.secondary_id_path],['Secondary ID Back',selected.secondary_back_path]].map(([l,path])=>(
+                path
+                  ? (docUrls[l]
+                      ? <div key={l} style={{marginBottom:8}}><a href={docUrls[l]} target="_blank" rel="noopener noreferrer" style={{color:'var(--ink-light)',fontWeight:600,fontSize:14}}>📄 View {l}</a> <span style={{fontSize:11,color:'var(--gray-mid)'}}>(secure link, expires in 10 min)</span></div>
+                      : <div key={l} style={{fontSize:13,color:'var(--gray-mid)',marginBottom:6}}>{l}: link unavailable</div>)
+                  : <div key={l} style={{fontSize:13,color:'var(--gray-mid)',marginBottom:6}}>{l}: Not uploaded</div>
+              ))}
+            </div>
+            <div style={{borderTop:'1px solid var(--gray-light)',paddingTop:16}}>
+              <h4 style={{fontSize:13,fontWeight:700,color:'var(--ink)',marginBottom:12,textTransform:'uppercase',letterSpacing:'0.05em'}}>Update Status</h4>
+              <div style={{display:'flex',gap:10,flexWrap:'wrap'}}>
+                {['pending','processing','complete'].map(s=>(
+                  <button key={s} onClick={()=>updateStatus(selected.id,s)} disabled={updating||selected.status===s}
+                    style={{padding:'9px 18px',borderRadius:8,border:'none',fontFamily:"'Inter',sans-serif",fontSize:14,fontWeight:700,cursor:'pointer',
+                      background:selected.status===s?'var(--ink)':'var(--off-white)',
+                      color:selected.status===s?'var(--white)':'var(--gray-dark)',
+                      opacity:updating?0.6:1}}>
+                    {s==='pending'?'Pending':s==='processing'?'In Progress':'Complete'}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="adm-bar">
+        <div><h2>Admin Dashboard</h2><span>Police Check Management · {cnt.total} applications · {staffEmail}</span></div>
+        <div style={{display:'flex',gap:10}}>
+          <button className="btn-bk" style={{borderColor:'rgba(255,255,255,0.2)',color:'var(--gray-mid)',fontSize:13}} onClick={()=>loadApps()}>↻ Refresh</button>
+          <button className="btn-bk" style={{borderColor:'rgba(255,255,255,0.2)',color:'var(--gray-mid)',fontSize:13}} onClick={logout}>Logout</button>
+        </div>
+      </div>
+      <div className="adm-stats">
+        <div className="stat-c"><div className="sn">{cnt.total}</div><div className="sl">Total Applications</div></div>
+        <div className="stat-c"><div className="sn" style={{color:'var(--success)'}}>{cnt.complete}</div><div className="sl">Completed</div></div>
+        <div className="stat-c"><div className="sn" style={{color:'#92600A'}}>{cnt.processing}</div><div className="sl">In Progress</div></div>
+        <div className="stat-c"><div className="sn" style={{color:'var(--gray-dark)'}}>{cnt.pending}</div><div className="sl">Pending Review</div></div>
+      </div>
+      <div className="tbl-wrap">
+        <div className="tbl-ctrl">
+          <input className="ts" placeholder="Search name or reference..." value={sq} onChange={e=>setSq(e.target.value)}/>
+          <select className="tf" value={sf} onChange={e=>setSf(e.target.value)}><option value="all">All Statuses</option><option value="complete">Complete</option><option value="processing">In Progress</option><option value="pending">Pending</option></select>
+          <button className="tf" onClick={()=>setGenderSort(p=>p===null?'asc':p==='asc'?'desc':null)}>
+            Sort by Gender{genderSort==='asc'?' ↑':genderSort==='desc'?' ↓':''}
+          </button>
+        </div>
+        {loading
+          ? <div style={{textAlign:'center',padding:40,color:'var(--gray-mid)'}}>Loading applications…</div>
+          : <div style={{border:'1px solid var(--gray-light)',borderRadius:'var(--radius)',overflow:'auto'}}>
+              <table>
+                <thead><tr><th>Applicant</th><th>Reference</th><th>Gender</th><th>Site</th><th>Submitted</th><th>Status</th><th></th></tr></thead>
+                <tbody>
+                  {filtered.map(a=>(
+                    <tr key={a.id}>
+                      <td style={{cursor:'pointer'}} onClick={()=>openDetails(a)}><div style={{fontWeight:700,color:'var(--ink)'}}>{a.first_name} {a.last_name}</div><div style={{fontSize:12,color:'var(--gray-mid)'}}>{a.email}</div></td>
+                      <td><span style={{fontFamily:'monospace',fontSize:12,color:'var(--gray-mid)'}}>{a.reference}</span></td>
+                      <td style={{fontSize:13}}>{a.gender||'—'}</td>
+                      <td style={{fontSize:13}}>{a.site||'—'}</td>
+                      <td style={{fontSize:13}}>{fmtDate(a.created_at)}</td>
+                      <td><span className={`sbadge ${a.status}`}>{a.status==='complete'?'Complete':a.status==='processing'?'In Progress':'Pending'}</span></td>
+                      <td><button className="abtn" onClick={()=>openDetails(a)}>View</button></td>
+                    </tr>
+                  ))}
+                  {filtered.length===0&&<tr><td colSpan={7} style={{textAlign:'center',padding:28,color:'var(--gray-mid)'}}>No results found.</td></tr>}
+                </tbody>
+              </table>
+            </div>
+        }
+      </div>
+    </div>
+  );
+}
+
+/* ── CONTACT ── */
+function Contact() {
+  const [sent,setSent]=useState(false);
+  const [form,setForm]=useState({name:'',email:'',company:'',message:'',type:''});
+  const upd=(k,v)=>setForm(f=>({...f,[k]:v}));
+  if(sent) return (
+    <div className="success-sc" style={{paddingTop:40}}>
+      <div className="s-icon">✓</div>
+      <h2>Message Sent!</h2>
+      <p>Thanks for reaching out. Our team will be in touch within one business day.</p>
+      <button className="btn-n" style={{marginTop:22}} onClick={()=>setSent(false)}>Send Another Message</button>
+    </div>
+  );
+  return (<>
+    <div className="sec" style={{background:'var(--ink)',paddingBottom:64}}>
+      <div className="inner">
+        <div className="lbl lbl-lt">Get in Touch</div>
+        <div className="h1 h1-lt">Let's Talk Staffing</div>
+        <p className="sub sub-lt">Whether you need warehouse workers or a police check, we're here to help.</p>
+      </div>
+    </div>
+    <div className="sec" style={{background:'var(--white)'}}>
+      <div className="inner">
+        <div className="contact-grid">
+          <div style={{display:'flex',flexDirection:'column',gap:26}}>
+            {[
+              {icon:'📍',t:'Headquarters',d:'100 Harris Street\nPyrmont NSW 2009'},
+              {icon:'📞',t:'Phone',d:'0470 632 701\nMon–Fri, 8am–5pm AEST'},
+              {icon:'✉️',t:'Email',d:'seth@swcstaffingsolutions.com.au'},
+            ].map(c=>(
+              <div className="ci" key={c.t}><div className="ci-icon">{c.icon}</div><div><strong>{c.t}</strong><p style={{whiteSpace:'pre-line'}}>{c.d}</p></div></div>
+            ))}
+            <div style={{background:'var(--signal-pale)',border:'1px solid var(--signal-light)',borderRadius:'var(--radius)',padding:20}}>
+              <strong style={{color:'var(--ink)',display:'block',marginBottom:7,fontSize:14}}>Employers — Request Workers</strong>
+              <p style={{fontSize:13,color:'var(--gray-dark)',lineHeight:1.7}}>Need warehouse staff fast? Call us directly on 0470 632 701 or email seth@swcstaffingsolutions.com.au for same-day response.</p>
+            </div>
+          </div>
+          <div className="cf">
+            <h3>Send Us a Message</h3>
+            <div style={{display:'flex',flexDirection:'column',gap:14}}>
+              <div className="fgrp"><label>Full Name</label><input value={form.name} onChange={e=>upd('name',e.target.value)} placeholder="Your name"/></div>
+              <div className="fgrp"><label>Email</label><input type="email" value={form.email} onChange={e=>upd('email',e.target.value)} placeholder="your@email.com"/></div>
+              <div className="fgrp"><label>Company (optional)</label><input value={form.company} onChange={e=>upd('company',e.target.value)} placeholder="Your company name"/></div>
+              <div className="fgrp"><label>Enquiry Type</label><select value={form.type} onChange={e=>upd('type',e.target.value)}><option value="">Select type</option><option>Labour Hire — I need warehouse workers</option><option>Police Check — I need more information</option><option>Compliance — workforce compliance help</option><option>General Enquiry</option></select></div>
+              <div className="fgrp"><label>Message</label><textarea value={form.message} onChange={e=>upd('message',e.target.value)} placeholder="How can we help?" rows={4}/></div>
+              <button className="btn-n" style={{width:'100%'}} onClick={()=>setSent(true)}>Send Message →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </>);
+}
+
+/* ── FOOTER ── */
+/* ── LEGAL PAGE LAYOUT ── */
+function LegalPage({ label, title, intro, sections, setPage }) {
+  return (<>
+    <div className="sec" style={{background:'var(--ink)',paddingBottom:56}}>
+      <div className="inner">
+        <div className="lbl lbl-lt">{label}</div>
+        <div className="h1 h1-lt">{title}</div>
+        <p className="sub sub-lt">{intro}</p>
+      </div>
+    </div>
+    <div className="sec" style={{background:'var(--white)'}}>
+      <div className="inner" style={{maxWidth:820}}>
+        {sections.map((s,i) => (
+          <div key={i} style={{marginBottom:36}}>
+            <h3 style={{fontFamily:"'Sora',sans-serif",fontSize:22,fontWeight:600,color:'var(--ink)',marginBottom:12}}>{s.h}</h3>
+            {s.p.map((para,j) => (
+              <p key={j} style={{fontSize:15,color:'var(--gray-dark)',lineHeight:1.8,marginBottom:12}}>{para}</p>
+            ))}
+            {s.list && (
+              <ul style={{margin:'6px 0 12px',paddingLeft:0,listStyle:'none'}}>
+                {s.list.map((li,k) => (
+                  <li key={k} style={{fontSize:15,color:'var(--gray-dark)',lineHeight:1.7,marginBottom:8,paddingLeft:24,position:'relative'}}>
+                    <span style={{position:'absolute',left:0,top:8,width:8,height:8,background:'var(--signal)',borderRadius:'50%'}}/>{li}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        ))}
+        <div style={{borderTop:'2px solid var(--ink)',paddingTop:24,marginTop:8}}>
+          <p style={{fontSize:14,color:'var(--gray-dark)',lineHeight:1.7,marginBottom:6}}>Questions about this policy? Contact us at <strong style={{color:'var(--ink)'}}>seth@swcstaffingsolutions.com.au</strong> or call <strong style={{color:'var(--ink)'}}>0470 632 701</strong>.</p>
+          <p style={{fontSize:13,color:'var(--gray-mid)'}}>Placewright Talent · ABN 95 576 836 195 · 100 Harris Street, Pyrmont NSW 2009 · Last updated {new Date().toLocaleDateString('en-AU',{month:'long',year:'numeric'})}.</p>
+          <button className="btn-bk" style={{marginTop:20}} onClick={()=>setPage('home')}>Return Home</button>
+        </div>
+      </div>
+    </div>
+  </>);
+}
+
+function Privacy({ setPage }) {
+  return <LegalPage setPage={setPage}
+    label="Legal"
+    title="Privacy Policy"
+    intro="Placewright Talent is committed to protecting your personal information and complying fully with Australian privacy law."
+    sections={[
+      {h:'Our commitment', p:['Placewright Talent ("we", "us", "our") is committed to protecting the privacy of every applicant, worker, and client we deal with. We comply with the Privacy Act 1988 (Cth) and the Australian Privacy Principles (APPs), as well as all other applicable Australian privacy and data-protection laws.','This policy explains what personal information we collect, why we collect it, how we use and protect it, and the rights you have in relation to it.']},
+      {h:'Information we collect', p:['We only collect personal information that is reasonably necessary for our functions as a staffing and recruitment provider. Depending on your dealings with us, this may include:'], list:['Contact details such as your name, address, email, and phone number','Work history, qualifications, licences, and right-to-work information','Information required to arrange a National Police Check, where you have consented','Availability, preferences, and other details relevant to placing you in work']},
+      {h:'How we use your information', p:['We use your personal information solely for legitimate business purposes connected with staffing and recruitment, including matching you to suitable roles, verifying your eligibility to work, arranging background checks you have consented to, and communicating with you about opportunities.','We do not sell your personal information, and we do not use it for unrelated purposes.']},
+      {h:'Disclosure to third parties', p:['We only disclose your personal information where necessary and permitted by law — for example, to prospective host employers with your knowledge, or to an accredited provider for the purpose of conducting a National Police Check that you have authorised.','Any National Police Check is conducted only through channels authorised under Australian law. We require third parties who handle your information to protect it to the same standard we do.']},
+      {h:'Storage and security', p:['We take reasonable steps to protect your personal information from misuse, loss, and unauthorised access, modification, or disclosure, using appropriate technical and organisational safeguards. We retain personal information only for as long as it is needed for the purpose it was collected or as required by law, and securely dispose of it when it is no longer required.']},
+      {h:'Access and correction', p:['You have the right to request access to the personal information we hold about you, and to ask us to correct it if it is inaccurate, out of date, or incomplete. We will respond to any such request in accordance with the Privacy Act 1988 (Cth).']},
+      {h:'Complaints', p:['If you believe we have not handled your personal information in line with this policy or the Australian Privacy Principles, please contact us and we will investigate. If you are not satisfied with our response, you may contact the Office of the Australian Information Commissioner (OAIC) at oaic.gov.au.']},
+    ]}
+  />;
+}
+
+function FairWork({ setPage }) {
+  return <LegalPage setPage={setPage}
+    label="Legal"
+    title="Fair Work Policy"
+    intro="Placewright Talent complies fully with the Fair Work Act and all applicable Australian workplace laws."
+    sections={[
+      {h:'Our commitment', p:['Placewright Talent is committed to fair, lawful, and ethical employment practices. We comply with the Fair Work Act 2009 (Cth), the National Employment Standards (NES), all relevant Modern Awards, and every other applicable Australian workplace and industrial relations law.','This applies to every worker we place and every client we work with, without exception.']},
+      {h:'Pay and conditions', p:['Every worker we engage is paid at or above the applicable minimum rate set by the relevant Modern Award or the national minimum wage, whichever applies. We ensure entitlements such as penalty rates, overtime, superannuation, and leave are provided in accordance with the law.']},
+      {h:'National Employment Standards', p:['We uphold the National Employment Standards for all eligible employees, including maximum weekly hours, leave entitlements, public holiday provisions, and the right to fair notice and consultation.']},
+      {h:'A safe and fair workplace', p:['We are committed to providing work environments free from discrimination, harassment, bullying, and unlawful treatment. We comply with all applicable Work Health and Safety (WHS) laws and expect the same of the host employers we place workers with.'], list:['Fair treatment regardless of background, gender, age, or other protected attribute','A workplace free from harassment, bullying, and discrimination','Proper WHS induction and safe working conditions on every placement','Clear, honest communication about roles, pay, and expectations']},
+      {h:'Right to work and lawful engagement', p:['We verify that every worker has the legal right to work in Australia before placement, and we engage workers lawfully under the correct classification and arrangement. We do not engage in sham contracting or any practice that undermines workers\u2019 lawful entitlements.']},
+      {h:'Raising a concern', p:['If any worker or client believes we have fallen short of these commitments, we encourage them to raise it with us directly so we can address it promptly. Workers are also free to seek information or assistance from the Fair Work Ombudsman at fairwork.gov.au.']},
+    ]}
+  />;
+}
+
+function Footer({ setPage }) {
+  return (
+    <footer>
+      <div className="ft-inner">
+        <div className="ft-grid">
+          <div className="ft-brand">
+            <div className="logo" style={{marginBottom:10}}>
+              <div className="logo-mark" style={{width:36,height:36,fontSize:13}}>PWT</div>
+              <div className="logo-text"><strong>Placewright Talent</strong></div>
+            </div>
+            <p>Australia's specialist warehouse and logistics staffing partner. Founded in Sydney in 2026. Serving businesses across all major Australian cities.</p>
+          </div>
+          <div className="ft-col"><h4>Company</h4><a onClick={()=>setPage('about')}>About Us</a><a onClick={()=>setPage('services')}>Our Services</a><a onClick={()=>setPage('jobs')}>Work With Us</a><a onClick={()=>setPage('contact')}>Contact</a></div>
+          <div className="ft-col"><h4>Police Checks</h4><a onClick={()=>setPage('police')}>Apply Online</a><a onClick={()=>setPage('police')}>Track Application</a><a onClick={()=>setPage('privacy')}>Privacy Policy</a><a onClick={()=>setPage('fairwork')}>Fair Work Policy</a></div>
+          <div className="ft-col"><h4>Contact</h4><a>seth@swcstaffingsolutions.com.au</a><a>0470 632 701</a><a>100 Harris Street, Pyrmont NSW 2009</a><a>Mon–Fri 8am–5pm AEST</a></div>
+        </div>
+        <div className="ft-bottom">
+          <p>© 2026 Placewright Talent · ABN 95 576 836 195 · Registered in Sydney</p>
+          <div className="ft-badges">
+            <span className="ft-badge">ACIC Accredited</span>
+            <span className="ft-badge">Privacy Act Compliant</span>
+            <span className="ft-badge">Fair Work Compliant</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+/* ── INTERVIEW PAGE (hidden from nav) ── */
+function Interview({ setPage }) {
+  const QUESTIONS = [
+    {
+      id: 'q1',
+      num: '01',
+      question: 'Can you describe your previous experience in a warehouse or similar environment?',
+      hint: 'e.g. picking, packing, inventory management, operating equipment',
+    },
+    {
+      id: 'q2',
+      num: '02',
+      question: 'How do you ensure accuracy when handling inventory or orders?',
+      hint: 'Tell us about your process for staying precise and avoiding errors',
+    },
+    {
+      id: 'q3',
+      num: '03',
+      question: 'Tell me about a time you had to meet tight deadlines or handle a high workload.',
+      hint: 'Describe the situation, what you did, and the outcome',
+    },
+    {
+      id: 'q4',
+      num: '04',
+      question: 'Are you comfortable with physical work, such as lifting, standing for long periods, or repetitive tasks?',
+      hint: 'Be honest — this helps us match you to the right role',
+    },
+    {
+      id: 'q5',
+      num: '05',
+      question: 'How do you handle safety procedures and workplace guidelines?',
+      hint: 'e.g. how you approach WHS, PPE, hazard reporting',
+    },
+  ];
+
+  const [answers, setAnswers] = useState({ q1:'', q2:'', q3:'', q4:'', q5:'' });
+  const [errs, setErrs] = useState({});
+  const [current, setCurrent] = useState(0);
+  const [submitting, setSubmitting] = useState(false);
+
+  const updAns = (id, val) => setAnswers(a => ({...a, [id]: val}));
+
+  const validateCurrent = () => {
+    const q = QUESTIONS[current];
+    if(!answers[q.id].trim()) {
+      setErrs(e => ({...e, [q.id]: 'Please provide an answer before continuing'}));
+      return false;
+    }
+    setErrs(e => ({...e, [q.id]: ''}));
+    return true;
+  };
+
+  const next = () => { if(validateCurrent()) setCurrent(c => c + 1); };
+  const back = () => setCurrent(c => c - 1);
+
+  const submit = async () => {
+    if(!validateCurrent()) return;
+    setSubmitting(true);
+    // Small delay for UX feel then redirect to police check
+    await new Promise(r => setTimeout(r, 1200));
+    setPage('police');
+  };
+
+  const progress = ((current) / QUESTIONS.length) * 100;
+
+  return (<>
+    <div style={{background:'var(--ink)', padding:'72px 48px 56px'}}>
+      <div style={{maxWidth:740, margin:'0 auto'}}>
+        <div className="lbl lbl-lt">Pre-Employment</div>
+        <div className="h1 h1-lt">Interview Questions</div>
+        <p className="sub sub-lt">Please answer each question honestly and in your own words. There are no right or wrong answers — we just want to get to know you better.</p>
+      </div>
+    </div>
+
+    <div className="sec" style={{background:'var(--white)'}}>
+      <div className="inner" style={{maxWidth:740}}>
+
+        {/* Progress */}
+        <div style={{marginBottom:40}}>
+          <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:10}}>
+            <span style={{fontSize:13,fontWeight:600,color:'var(--gray-mid)'}}>Question {current+1} of {QUESTIONS.length}</span>
+            <span style={{fontSize:13,fontWeight:700,color:'var(--ink)'}}>{Math.round(((current)/QUESTIONS.length)*100)}% complete</span>
+          </div>
+          <div style={{height:6,background:'var(--gray-light)',borderRadius:3,overflow:'hidden'}}>
+            <div style={{height:'100%',width:`${progress}%`,background:'var(--signal)',borderRadius:3,transition:'width 0.4s ease'}}/>
+          </div>
+          <div style={{display:'flex',gap:8,marginTop:12}}>
+            {QUESTIONS.map((q,i) => (
+              <div key={q.id} style={{flex:1,height:4,borderRadius:2,background:i<current?'var(--signal)':i===current?'var(--signal-light)':'var(--gray-light)',transition:'background 0.3s'}}/>
+            ))}
+          </div>
+        </div>
+
+        {/* Question Card */}
+        <div style={{background:'var(--white)',border:'1px solid var(--gray-light)',borderRadius:8,overflow:'hidden',boxShadow:'var(--shadow-lg)'}}>
+          <div style={{background:'var(--ink)',padding:'28px 36px',display:'flex',alignItems:'flex-start',gap:20}}>
+            <div style={{width:48,height:48,borderRadius:12,background:'rgba(129,140,248,0.18)',border:'1px solid rgba(129,140,248,0.45)',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>
+              <span style={{fontFamily:"'Sora',sans-serif",fontSize:18,fontWeight:700,color:'var(--signal-light)'}}>{QUESTIONS[current].num}</span>
+            </div>
+            <div>
+              <h3 style={{color:'var(--white)',fontSize:18,fontWeight:700,lineHeight:1.4,marginBottom:8}}>{QUESTIONS[current].question}</h3>
+              <p style={{color:'var(--gray-mid)',fontSize:13}}>{QUESTIONS[current].hint}</p>
+            </div>
+          </div>
+
+          <div style={{padding:'32px 36px'}}>
+            <div className="fgrp">
+              <label style={{marginBottom:8,fontSize:13,color:'var(--gray-dark)',fontWeight:500}}>Your answer</label>
+              <textarea
+                value={answers[QUESTIONS[current].id]}
+                onChange={e => updAns(QUESTIONS[current].id, e.target.value)}
+                placeholder="Type your answer here..."
+                rows={6}
+                style={{fontSize:15,lineHeight:1.7,resize:'vertical',minHeight:140}}
+                className={errs[QUESTIONS[current].id] ? 'ferr-i' : ''}
+              />
+              {errs[QUESTIONS[current].id] && <span className="ferr">{errs[QUESTIONS[current].id]}</span>}
+            </div>
+
+            {/* Word count */}
+            <div style={{textAlign:'right',fontSize:12,color:'var(--gray-mid)',marginTop:6}}>
+              {answers[QUESTIONS[current].id].trim().split(/\s+/).filter(Boolean).length} words
+            </div>
+          </div>
+
+          <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'20px 36px',borderTop:'1px solid var(--gray-light)',background:'var(--off-white)'}}>
+            {current > 0
+              ? <button className="btn-bk" onClick={back}>← Back</button>
+              : <span/>
+            }
+            {current < QUESTIONS.length - 1
+              ? <button className="btn-n" onClick={next}>Next Question →</button>
+              : <button className="btn-sub" onClick={submit} disabled={submitting} style={{opacity:submitting?0.7:1}}>
+                  {submitting ? 'Submitting… ⏳' : 'Submit & Continue to Police Check →'}
+                </button>
+            }
+          </div>
+        </div>
+
+        {/* Question dots nav */}
+        <div style={{display:'flex',gap:10,justifyContent:'center',marginTop:28}}>
+          {QUESTIONS.map((q,i) => (
+            <div key={q.id} style={{
+              width: i===current?28:10, height:10, borderRadius:5,
+              background: i<current?'var(--signal)':i===current?'var(--ink)':'var(--gray-light)',
+              transition:'all 0.3s', cursor: i<current?'pointer':'default'
+            }} onClick={() => i<current && setCurrent(i)}/>
+          ))}
+        </div>
+
+        <p style={{textAlign:'center',fontSize:13,color:'var(--gray-mid)',marginTop:20}}>
+          After submitting you'll be directed to complete your National Police Check — this is required for all roles.
+        </p>
+      </div>
+    </div>
+  </>);
+}
+
+/* ── APPLY NOW (standalone job application page) ── */
+function ApplyNow({ setPage }) {
+  const [done, setDone] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitErr, setSubmitErr] = useState('');
+  const [form, setForm] = useState({
+    firstName:'', middleName:'', lastName:'', dob:'', gender:'',
+    email:'', phone:'', address:'', suburb:'', state:'', postcode:'',
+    preferredCity:'', workType:'',
+  });
+  const [errs, setErrs] = useState({});
+  const upd = (k,v) => setForm(f=>({...f,[k]:v}));
+
+  const validate = () => {
+    const e = {};
+    if(!form.firstName.trim()) e.firstName = 'Required';
+    if(!form.lastName.trim()) e.lastName = 'Required';
+    if(!form.dob) e.dob = 'Required';
+    if(!form.email.includes('@')) e.email = 'Valid email required';
+    if(!form.phone.trim()) e.phone = 'Required';
+    if(!form.address.trim()) e.address = 'Required';
+    if(!form.suburb.trim()) e.suburb = 'Required';
+    if(!form.state) e.state = 'Required';
+    if(!form.postcode.trim()) e.postcode = 'Required';
+    if(!form.preferredCity) e.preferredCity = 'Required';
+    if(!form.workType) e.workType = 'Required';
+    setErrs(e);
+    return Object.keys(e).length === 0;
+  };
+
+  const submit = async () => {
+    if(!validate()) return;
+    setSubmitting(true);
+    setSubmitErr('');
+    try {
+      await sb.insert('job_applications', {
+        first_name: form.firstName,
+        middle_name: form.middleName,
+        last_name: form.lastName,
+        dob: form.dob,
+        gender: form.gender,
+        email: form.email,
+        phone: form.phone,
+        address: form.address,
+        suburb: form.suburb,
+        state: form.state,
+        postcode: form.postcode,
+        preferred_city: form.preferredCity,
+        work_type: form.workType,
+        status: 'new',
+      });
+      try {
+        await emailjs.send('personnelstaffingaus', 'template_w3e2d1k', {
+          name: `${form.firstName} ${form.middleName} ${form.lastName}`.trim(),
+          email: form.email,
+          phone: form.phone,
+          city: form.preferredCity,
+          work_type: form.workType,
+        });
+      } catch(emailErr) { console.warn('Email notification failed:', emailErr); }
+      setDone(true);
+    } catch(err) {
+      console.error(err);
+      setSubmitErr('Something went wrong. Please try again or call us on 0470 632 701.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  if(done) return (
+    <div className="success-sc" style={{paddingTop:80}}>
+      <div className="s-icon">✓</div>
+      <h2>Application Received!</h2>
+      <p>Thanks for applying! Our team will review your details and be in touch as soon as a suitable role becomes available.</p>
+      <p style={{marginTop:8}}>Questions? Call us on <strong>0470 632 701</strong>.</p>
+      <div style={{display:'flex',gap:12,justifyContent:'center',flexWrap:'wrap',marginTop:28}}>
+        <button className="btn-n" onClick={()=>{setDone(false);setForm({firstName:'',middleName:'',lastName:'',dob:'',gender:'',email:'',phone:'',address:'',suburb:'',state:'',postcode:'',preferredCity:'',workType:''});}}>Submit Another</button>
+        <button className="btn-bk" onClick={()=>setPage('home')}>Return Home</button>
+      </div>
+    </div>
+  );
+
+  return (<>
+    <div className="sec" style={{background:'var(--ink)',paddingBottom:64}}>
+      <div className="inner">
+        <div className="lbl lbl-lt">Now Hiring</div>
+        <div className="h1 h1-lt">Apply for a Position</div>
+        <p className="sub sub-lt">Fill in your details below and we'll match you with available warehouse and logistics roles across Australia.</p>
+      </div>
+    </div>
+
+    <div className="sec" style={{background:'var(--white)'}}>
+      <div className="inner" style={{maxWidth:780}}>
+        <div className="form-wrap">
+          <div className="form-hdr">
+            <div>
+              <h3>Job Application Form</h3>
+              <p>All fields marked * are required. Your details are kept private and secure.</p>
+            </div>
+          </div>
+          <div className="form-body">
+            <div className="info-b">ℹ️ Enter your details exactly as they appear on your ID.</div>
+
+            <div style={{fontSize:13,fontWeight:700,color:'var(--ink)',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:14}}>Personal Details</div>
+            <div className="fg" style={{marginBottom:20}}>
+              <div className="fgrp"><label>First Name <span className="req">*</span></label><input value={form.firstName} onChange={e=>upd('firstName',e.target.value)} className={errs.firstName?'ferr-i':''}/>{errs.firstName&&<span className="ferr">{errs.firstName}</span>}</div>
+              <div className="fgrp"><label>Middle Name</label><input value={form.middleName} onChange={e=>upd('middleName',e.target.value)} placeholder="If applicable"/></div>
+              <div className="fgrp"><label>Last Name <span className="req">*</span></label><input value={form.lastName} onChange={e=>upd('lastName',e.target.value)} className={errs.lastName?'ferr-i':''}/>{errs.lastName&&<span className="ferr">{errs.lastName}</span>}</div>
+              <div className="fgrp"><label>Date of Birth <span className="req">*</span></label><input type="date" value={form.dob} onChange={e=>upd('dob',e.target.value)} className={errs.dob?'ferr-i':''}/>{errs.dob&&<span className="ferr">{errs.dob}</span>}</div>
+              <div className="fgrp"><label>Gender</label><select value={form.gender} onChange={e=>upd('gender',e.target.value)}><option value="">Prefer not to say</option>{['Male','Female','Non-binary','Other'].map(g=><option key={g}>{g}</option>)}</select></div>
+              <div className="fgrp"><label>Email <span className="req">*</span></label><input type="email" value={form.email} onChange={e=>upd('email',e.target.value)} className={errs.email?'ferr-i':''} placeholder="your@email.com"/>{errs.email&&<span className="ferr">{errs.email}</span>}</div>
+              <div className="fgrp"><label>Mobile <span className="req">*</span></label><input type="tel" value={form.phone} onChange={e=>upd('phone',e.target.value)} className={errs.phone?'ferr-i':''} placeholder="04XX XXX XXX"/>{errs.phone&&<span className="ferr">{errs.phone}</span>}</div>
+            </div>
+
+            <div style={{fontSize:13,fontWeight:700,color:'var(--ink)',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:14,paddingTop:16,borderTop:'1px solid var(--gray-light)'}}>Home Address</div>
+            <div className="fg" style={{marginBottom:20}}>
+              <div className="fgrp fg-full"><label>Street Address <span className="req">*</span></label><input value={form.address} onChange={e=>upd('address',e.target.value)} className={errs.address?'ferr-i':''} placeholder="Street number and name"/>{errs.address&&<span className="ferr">{errs.address}</span>}</div>
+              <div className="fgrp"><label>Suburb <span className="req">*</span></label><input value={form.suburb} onChange={e=>upd('suburb',e.target.value)} className={errs.suburb?'ferr-i':''}/>{errs.suburb&&<span className="ferr">{errs.suburb}</span>}</div>
+              <div className="fgrp"><label>State <span className="req">*</span></label><select value={form.state} onChange={e=>upd('state',e.target.value)} className={errs.state?'ferr-i':''}><option value="">Select</option>{['NSW','VIC','QLD','WA','SA','TAS','ACT','NT'].map(s=><option key={s}>{s}</option>)}</select>{errs.state&&<span className="ferr">{errs.state}</span>}</div>
+              <div className="fgrp"><label>Postcode <span className="req">*</span></label><input value={form.postcode} onChange={e=>upd('postcode',e.target.value)} className={errs.postcode?'ferr-i':''} maxLength={4} placeholder="e.g. 6000"/>{errs.postcode&&<span className="ferr">{errs.postcode}</span>}</div>
+            </div>
+
+            <div style={{fontSize:13,fontWeight:700,color:'var(--ink)',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:14,paddingTop:16,borderTop:'1px solid var(--gray-light)'}}>Work Preferences</div>
+            <div className="fg">
+              <div className="fgrp">
+                <label>Preferred City to Work <span className="req">*</span></label>
+                <select value={form.preferredCity} onChange={e=>upd('preferredCity',e.target.value)} className={errs.preferredCity?'ferr-i':''}>
+                  <option value="">Select city</option>
+                  {['Sydney','Melbourne','Brisbane','Perth','Adelaide','Canberra','Gold Coast','Newcastle','Wollongong','Geelong'].map(c=><option key={c}>{c}</option>)}
+                </select>
+                {errs.preferredCity&&<span className="ferr">{errs.preferredCity}</span>}
+              </div>
+              <div className="fgrp">
+                <label>Preferred Work Type <span className="req">*</span></label>
+                <select value={form.workType} onChange={e=>upd('workType',e.target.value)} className={errs.workType?'ferr-i':''}>
+                  <option value="">Select type</option>
+                  {['Casual','Part-time','Full-time','Any'].map(t=><option key={t}>{t}</option>)}
+                </select>
+                {errs.workType&&<span className="ferr">{errs.workType}</span>}
+              </div>
+            </div>
+
+            {submitErr&&<div style={{background:'var(--error-bg)',border:'1px solid #F5C6CB',borderRadius:'var(--radius-sm)',padding:14,marginTop:16,color:'var(--error)',fontSize:13}}>{submitErr}</div>}
+          </div>
+          <div className="form-nav">
+            <span/>
+            <button className="btn-sub" onClick={submit} disabled={submitting} style={{opacity:submitting?0.7:1}}>
+              {submitting?'Submitting…':'Submit Application →'}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </>);
+}
+
+/* ── ROUTER ── */
+const ROUTES = {
+  '/': 'home',
+  '/about': 'about',
+  '/services': 'services',
+  '/jobs': 'jobs',
+  '/apply-now': 'applynow',
+  '/interview': 'interview',
+  '/apply': 'police',
+  '/track': 'police',
+  '/admin': 'police',
+  '/contact': 'contact',
+  '/privacy': 'privacy',
+  '/fair-work': 'fairwork',
+};
+
+const TAB_ROUTES = {
+  '/apply': 'apply',
+  '/track': 'track',
+  '/admin': 'admin',
+};
+
+function getPageFromPath(path) {
+  return ROUTES[path] || 'home';
+}
+
+function App() {
+  const getPath = () => window.location.pathname;
+  const [page, setPage] = React.useState(getPageFromPath(getPath()));
+  const [policeTab, setPoliceTab] = React.useState(TAB_ROUTES[getPath()] || 'apply');
+
+  const navigate = (p) => {
+    const pathMap = { home:'/', about:'/about', services:'/services', jobs:'/jobs', applynow:'/apply-now', interview:'/interview', police:'/apply', contact:'/contact', privacy:'/privacy', fairwork:'/fair-work' };
+    const path = pathMap[p] || '/';
+    window.history.pushState({}, '', path);
+    setPage(p);
+    if(p === 'police') setPoliceTab('apply');
+    window.scrollTo(0, 0);
+  };
+
+  const navigateTab = (tab) => {
+    const tabPaths = { apply:'/apply', track:'/track', admin:'/admin' };
+    window.history.pushState({}, '', tabPaths[tab] || '/apply');
+    setPoliceTab(tab);
+    window.scrollTo(0, 0);
+  };
+
+  React.useEffect(() => {
+    const onPop = () => {
+      const p = getPath();
+      setPage(getPageFromPath(p));
+      if(TAB_ROUTES[p]) setPoliceTab(TAB_ROUTES[p]);
+    };
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, []);
+
+  const pages = { home:Home, about:About, services:Services, jobs:Jobs, applynow:ApplyNow, interview:Interview, police:Police, contact:Contact, privacy:Privacy, fairwork:FairWork };
+  const Page = pages[page] || Home;
+
+  return (
+    <>
+      <Nav page={page} setPage={navigate}/>
+      <Page setPage={navigate} policeTab={policeTab} setPoliceTab={navigateTab}/>
+      <Footer setPage={navigate}/>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
